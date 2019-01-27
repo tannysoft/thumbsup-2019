@@ -1,0 +1,50 @@
+.button,
+a.button{
+  min-height: 50px;
+  color: $white;
+  font-family: $brandfont;
+  font-weight: 200;
+  @include font-size(30);
+  @include transition(all $transition);
+  display: inline-block;
+  margin: 0px 10px;
+
+  @include max-screen(575px){
+    @include font-size(20);
+    min-height: 40px;
+  }
+
+  &._brand{
+    background-color: $brand-color;
+  }
+
+  &._size-m{
+    min-height: 62px;
+  }
+
+  &-outline{
+    border: 1px solid $white;
+    padding: 9px 30px;
+    @include bg-transparent();
+
+    .icon{
+      margin-left: 20px;
+    }
+
+    &:hover{
+      background-color: $brand-color;
+      cursor: pointer;
+      border: 1px solid $brand-color;
+    }
+
+    &._border-gray{
+      border: 1px solid #666666;
+      color: #666666;
+
+      &:hover{
+        background-color: #666666;
+        color: $white;
+      }
+    }
+  }
+}

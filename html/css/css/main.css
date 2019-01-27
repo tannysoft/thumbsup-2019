@@ -1,0 +1,1895 @@
+@charset "UTF-8";
+/*------------------------------------*		# primary Sass file
+
+		## doc scss
+		http://github.com/paranoida/sass-mediaqueries
+		http://bourbon.io/docs/
+\*------------------------------------*/
+/**
+ * Allows you to use retina images at various pixel densities.
+ * Examples:
+ *
+ *   @include retina(/images/mypic.jpg, 2);
+ *   @include retina(/images/mypic.jpg, 3, 100px 100px, left top no-repeat transparent);
+ *
+ * @param  {Value}  $path               The path to the file name minus extension.
+ * @param  {Number} $cap:    2          The highest pixel density level images exist for.
+ * @param  {Value}  $size:   auto auto  The intended width of the rendered image.
+ * @param  {Value}  $extras: null       Any other `background` values to be added.
+ */
+/*------------------------------------*		All helpers
+		|– helpers/ 
+		|   |– _variables.scss   # Sass Variables 
+		|   |– _functions.scss   # Sass Functions 
+		|   |– _mixins.scss      # Sass Mixins 
+		|   |– _helpers.scss     # Class & placeholders helpers 
+		|   ...                  # Etc… 
+		Helpers
+		
+		The helpers/ folder (sometimes called utils/) gathers all Sass tools and helpers we’ll use across the project. Got a function? A mixin? Put it in there. This folder also contains a _variables.scss file (sometimes _config.scss) which holds all global variables for the project (for typography, color schemes, and so on).
+
+\*------------------------------------*/
+/*------------------------------------*		# Scss Mixins
+\*------------------------------------*/
+.no-gutter {
+  margin-left: 0;
+  margin-right: 0; }
+
+.no-gutter > * {
+  padding-left: 0;
+  padding-right: 0; }
+
+.show {
+  display: block !important; }
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important; }
+
+.invisible {
+  visibility: hidden; }
+
+.non-bg {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important; }
+
+.non-padding {
+  padding: 0 !important; }
+
+.non-margin {
+  margin: 0 !important; }
+
+.no-padding__r {
+  padding-right: 0; }
+
+.no-padding__l {
+  padding-left: 0; }
+
+.text-nowrap {
+  white-space: nowrap; }
+
+.text-uppercase {
+  text-transform: uppercase; }
+
+.display--table {
+  display: table;
+  width: 100%; }
+
+.display--table-cell {
+  display: table-cell; }
+
+.verticel--middle {
+  vertical-align: middle; }
+
+.insert-dotdotdot {
+  display: block;
+  overflow: visible;
+  text-overflow: ellipsis; }
+
+html.touch .no-scroll {
+  position: fixed; }
+
+@media only screen and (max-width: 575px) {
+  .col-ss-full {
+    width: 100%;
+    display: block; } }
+
+.visible-ss {
+  display: none; }
+  @media only screen and (max-width: 575px) {
+    .visible-ss {
+      display: block; } }
+
+@media only screen and (max-width: 767px) {
+  .text-right.-sm {
+    text-align: left; } }
+
+.text-center.-lg {
+  text-align: left; }
+  @media only screen and (min-width: 1200px) {
+    .text-center.-lg {
+      text-align: center; } }
+
+.view.thumb {
+  position: relative; }
+  .view.thumb .img-photo {
+    max-width: 100%;
+    transition: all 0.3s linear; }
+  .view.thumb:hover .img-photo {
+    -webkit-transform: scale(1.06);
+            transform: scale(1.06); }
+
+.view .mask {
+  opacity: 0;
+  overflow: visible;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  transition: all 0.4s ease-in-out;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+  display: none; }
+  .view .mask.non-bg {
+    background-color: transparent; }
+
+.view:hover .mask, .view:focus .mask, .view:active .mask {
+  opacity: 1; }
+
+.parent {
+  position: absolute;
+  height: 100%;
+  width: 100%; }
+  .parent span.img-photo {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all 0.3s linear;
+    display: block; }
+  .parent:hover span.img-photo, .parent:focus span.img-photo {
+    -webkit-transform: scale(1.06);
+    transform: scale(1.06); }
+
+html.desktop .visible-touch {
+  display: none !important; }
+
+html.touch .visible-touch {
+  display: block; }
+
+html.touch .visible-touch.link-email,
+html.desktop .hidden-touch.link-email {
+  display: table !important; }
+
+html.desktop .hidden-touch {
+  display: block; }
+
+html.touch .hidden-touch {
+  display: none !important; }
+
+a.no-hand {
+  pointer-events: none; }
+
+.fb-page,
+.fb-page span,
+.fb-page span iframe[style] {
+  width: 100% !important; }
+  .fb-page body.plugin,
+  .fb-page span body.plugin,
+  .fb-page span iframe[style] body.plugin {
+    width: 100% !important; }
+
+._font-size-36 {
+  font-size: 36px;
+  font-size: 3.6rem; }
+
+._font-size-60 {
+  font-size: 60px;
+  font-size: 6rem; }
+
+._font-light {
+  font-weight: 100; }
+
+._font-regular {
+  font-weight: normal; }
+
+._font-medium {
+  font-weight: 300; }
+
+._font-bold {
+  font-weight: 400; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin: 0;
+  font-family: "helvethaicaX";
+  text-rendering: optimizelegibility;
+  line-height: 1;
+  font-weight: 400; }
+
+h1 small,
+h2 small {
+  font-weight: normal;
+  color: #bfbfbf; }
+
+.h1 {
+  font-size: 80px;
+  font-size: 8rem; }
+
+.h2 {
+  font-size: 70px;
+  font-size: 7rem; }
+  @media only screen and (max-width: 767px) {
+    .h2 {
+      font-size: 35px;
+      font-size: 3.5rem; } }
+
+.h3 {
+  font-size: 50px;
+  font-size: 5rem; }
+
+.h4 {
+  font-size: 40px;
+  font-size: 4rem; }
+
+.h5 {
+  font-size: 36px;
+  font-size: 3.6rem; }
+
+p,
+ol,
+ul,
+dl,
+address {
+  margin-bottom: 1.42857; }
+
+small {
+  font-weight: lighter; }
+
+ul,
+ol {
+  margin: 0;
+  padding: 0 0 0 30px; }
+
+li ul,
+li ol {
+  margin: 0; }
+
+blockquote {
+  margin: 0;
+  padding-left: 30px; }
+
+q {
+  quotes: none; }
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none; }
+
+cite {
+  font-style: normal; }
+
+dl,
+dd {
+  margin-bottom: 1.42857; }
+
+dt {
+  font-weight: bold; }
+
+.dl-horizontal dt {
+  float: left;
+  clear: left;
+  width: 20.25%;
+  text-align: right; }
+
+.dl-horizontal dd {
+  margin-left: 22.78%; }
+
+abbr[title] {
+  border-bottom: 1px dotted #cccccc;
+  cursor: help; }
+
+b, strong {
+  font-weight: bold; }
+
+dfn {
+  font-style: italic; }
+
+ins {
+  background-color: #bfbfbf;
+  color: #000000;
+  text-decoration: none; }
+
+mark {
+  background-color: #bfbfbf;
+  color: #000000;
+  font-style: italic;
+  font-weight: bold; }
+
+pre,
+code,
+kbd,
+samp {
+  font-family: Monaco, Courier New, monospace;
+  line-height: 1.42857; }
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+sub,
+sup {
+  position: relative;
+  line-height: 0;
+  vertical-align: 1.42857; }
+
+sup {
+  top: -.5em; }
+
+sub {
+  bottom: -.25em; }
+
+p {
+  margin-bottom: 0;
+  line-height: 1.35; }
+
+a {
+  text-decoration: none;
+  color: #cc8352; }
+  a:visited {
+    color: #cc8352; }
+  a:hover {
+    color: #b56936; }
+  a:focus {
+    outline: thin dotted;
+    color: #cc8352;
+    text-decoration: none; }
+  a:hover, a:active {
+    outline: 0; }
+
+::-moz-selection {
+  background-color: #AAD8FF;
+  color: #000000;
+  text-shadow: none; }
+
+::selection {
+  background-color: #AAD8FF;
+  color: #000000;
+  text-shadow: none; }
+
+.color-black {
+  color: black; }
+
+.color-white {
+  color: white; }
+
+.color-brand {
+  color: #cc8352; }
+
+.color-brown {
+  color: #cc8352; }
+
+.color-gray {
+  color: #4B4B4B; }
+
+._bg-darkblack {
+  background-color: #333333; }
+
+._bg-gradient {
+  position: relative; }
+  ._bg-gradient:before, ._bg-gradient:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0; }
+  ._bg-gradient:before {
+    background: #6c451f;
+    background: linear-gradient(0deg, #6c451f 0%, #8d5d2b 100%); }
+  ._bg-gradient:after {
+    background-color: rgba(20, 20, 20, 0.3); }
+  ._bg-gradient ._show-relative {
+    position: relative;
+    z-index: 10; }
+
+/**
+ * Swiper 4.0.7
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ * http://www.idangero.us/swiper/
+ *
+ * Copyright 2014-2017 Vladimir Kharlampidi
+ *
+ * Released under the MIT License
+ *
+ * Released on: November 28, 2017
+ */
+.swiper-container {
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  /* Fix of Webkit flickering */
+  z-index: 1; }
+
+.swiper-container-no-flexbox .swiper-slide {
+  float: left; }
+
+.swiper-container-vertical > .swiper-wrapper {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  box-sizing: content-box; }
+
+.swiper-container-android .swiper-slide,
+.swiper-wrapper {
+  -webkit-transform: translate3d(0px, 0, 0);
+  transform: translate3d(0px, 0, 0); }
+
+.swiper-container-multirow > .swiper-wrapper {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.swiper-container-free-mode > .swiper-wrapper {
+  transition-timing-function: ease-out;
+  margin: 0 auto; }
+
+.swiper-slide {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform; }
+
+.swiper-invisible-blank-slide {
+  visibility: hidden; }
+
+/* Auto Height */
+.swiper-container-autoheight,
+.swiper-container-autoheight .swiper-slide {
+  height: auto; }
+
+.swiper-container-autoheight .swiper-wrapper {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  transition-property: height, -webkit-transform;
+  transition-property: transform, height;
+  transition-property: transform, height, -webkit-transform; }
+
+/* 3D Effects */
+.swiper-container-3d {
+  -webkit-perspective: 1200px;
+  perspective: 1200px; }
+
+.swiper-container-3d .swiper-wrapper,
+.swiper-container-3d .swiper-slide,
+.swiper-container-3d .swiper-slide-shadow-left,
+.swiper-container-3d .swiper-slide-shadow-right,
+.swiper-container-3d .swiper-slide-shadow-top,
+.swiper-container-3d .swiper-slide-shadow-bottom,
+.swiper-container-3d .swiper-cube-shadow {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+
+.swiper-container-3d .swiper-slide-shadow-left,
+.swiper-container-3d .swiper-slide-shadow-right,
+.swiper-container-3d .swiper-slide-shadow-top,
+.swiper-container-3d .swiper-slide-shadow-bottom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10; }
+
+.swiper-container-3d .swiper-slide-shadow-left {
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent); }
+
+.swiper-container-3d .swiper-slide-shadow-right {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent); }
+
+.swiper-container-3d .swiper-slide-shadow-top {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent); }
+
+.swiper-container-3d .swiper-slide-shadow-bottom {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent); }
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-container-wp8-horizontal,
+.swiper-container-wp8-horizontal > .swiper-wrapper {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y; }
+
+.swiper-container-wp8-vertical,
+.swiper-container-wp8-vertical > .swiper-wrapper {
+  -ms-touch-action: pan-x;
+  touch-action: pan-x; }
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  width: 27px;
+  height: 44px;
+  margin-top: -22px;
+  z-index: 10;
+  cursor: pointer;
+  background-size: 27px 44px;
+  background-position: center;
+  background-repeat: no-repeat; }
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: auto;
+  pointer-events: none; }
+
+.swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+  left: 10px;
+  right: auto; }
+
+.swiper-button-next,
+.swiper-container-rtl .swiper-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+  right: 10px;
+  left: auto; }
+
+.swiper-button-prev.swiper-button-white,
+.swiper-container-rtl .swiper-button-next.swiper-button-white {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E"); }
+
+.swiper-button-next.swiper-button-white,
+.swiper-container-rtl .swiper-button-prev.swiper-button-white {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E"); }
+
+.swiper-button-prev.swiper-button-black,
+.swiper-container-rtl .swiper-button-next.swiper-button-black {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23000000'%2F%3E%3C%2Fsvg%3E"); }
+
+.swiper-button-next.swiper-button-black,
+.swiper-container-rtl .swiper-button-prev.swiper-button-black {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23000000'%2F%3E%3C%2Fsvg%3E"); }
+
+.swiper-pagination {
+  position: absolute;
+  text-align: center;
+  transition: 300ms opacity;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 10; }
+
+.swiper-pagination.swiper-pagination-hidden {
+  opacity: 0; }
+
+/* Common Styles */
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 10px;
+  left: 0;
+  width: 100%; }
+
+/* Bullets */
+.swiper-pagination-bullets-dynamic {
+  overflow: hidden;
+  font-size: 0; }
+
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+  -webkit-transform: scale(0.33);
+  transform: scale(0.33);
+  position: relative; }
+
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active {
+  -webkit-transform: scale(1);
+  transform: scale(1); }
+
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev {
+  -webkit-transform: scale(0.66);
+  transform: scale(0.66); }
+
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev-prev {
+  -webkit-transform: scale(0.33);
+  transform: scale(0.33); }
+
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next {
+  -webkit-transform: scale(0.66);
+  transform: scale(0.66); }
+
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next {
+  -webkit-transform: scale(0.33);
+  transform: scale(0.33); }
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 100%;
+  background: #000;
+  opacity: 0.2; }
+
+button.swiper-pagination-bullet {
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.swiper-pagination-clickable .swiper-pagination-bullet {
+  cursor: pointer; }
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #007aff; }
+
+.swiper-container-vertical > .swiper-pagination-bullets {
+  right: 10px;
+  top: 50%;
+  -webkit-transform: translate3d(0px, -50%, 0);
+  transform: translate3d(0px, -50%, 0); }
+
+.swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 6px 0;
+  display: block; }
+
+.swiper-container-vertical > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 8px; }
+
+.swiper-container-vertical > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+  display: inline-block;
+  transition: 200ms top, 200ms -webkit-transform;
+  transition: 200ms transform, 200ms top;
+  transition: 200ms transform, 200ms top, 200ms -webkit-transform; }
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 4px; }
+
+.swiper-container-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  white-space: nowrap; }
+
+.swiper-container-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+  transition: 200ms left, 200ms -webkit-transform;
+  transition: 200ms transform, 200ms left;
+  transition: 200ms transform, 200ms left, 200ms -webkit-transform; }
+
+.swiper-container-horizontal.swiper-container-rtl > .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+  transition: 200ms right, 200ms -webkit-transform;
+  transition: 200ms transform, 200ms right;
+  transition: 200ms transform, 200ms right, 200ms -webkit-transform; }
+
+/* Progress */
+.swiper-pagination-progressbar {
+  background: rgba(0, 0, 0, 0.25);
+  position: absolute; }
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background: #007aff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transform-origin: left top;
+  transform-origin: left top; }
+
+.swiper-container-rtl .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  -webkit-transform-origin: right top;
+  transform-origin: right top; }
+
+.swiper-container-horizontal > .swiper-pagination-progressbar {
+  width: 100%;
+  height: 4px;
+  left: 0;
+  top: 0; }
+
+.swiper-container-vertical > .swiper-pagination-progressbar {
+  width: 4px;
+  height: 100%;
+  left: 0;
+  top: 0; }
+
+.swiper-pagination-white .swiper-pagination-bullet-active {
+  background: #ffffff; }
+
+.swiper-pagination-progressbar.swiper-pagination-white {
+  background: rgba(255, 255, 255, 0.25); }
+
+.swiper-pagination-progressbar.swiper-pagination-white .swiper-pagination-progressbar-fill {
+  background: #ffffff; }
+
+.swiper-pagination-black .swiper-pagination-bullet-active {
+  background: #000000; }
+
+.swiper-pagination-progressbar.swiper-pagination-black {
+  background: rgba(0, 0, 0, 0.25); }
+
+.swiper-pagination-progressbar.swiper-pagination-black .swiper-pagination-progressbar-fill {
+  background: #000000; }
+
+/* Scrollbar */
+.swiper-scrollbar {
+  border-radius: 10px;
+  position: relative;
+  -ms-touch-action: none;
+  background: rgba(0, 0, 0, 0.1); }
+
+.swiper-container-horizontal > .swiper-scrollbar {
+  position: absolute;
+  left: 1%;
+  bottom: 3px;
+  z-index: 50;
+  height: 5px;
+  width: 98%; }
+
+.swiper-container-vertical > .swiper-scrollbar {
+  position: absolute;
+  right: 3px;
+  top: 1%;
+  z-index: 50;
+  width: 5px;
+  height: 98%; }
+
+.swiper-scrollbar-drag {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  left: 0;
+  top: 0; }
+
+.swiper-scrollbar-cursor-drag {
+  cursor: move; }
+
+.swiper-zoom-container {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center; }
+
+.swiper-zoom-container > img,
+.swiper-zoom-container > svg,
+.swiper-zoom-container > canvas {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain; }
+
+.swiper-slide-zoomed {
+  cursor: move; }
+
+/* Preloader */
+.swiper-lazy-preloader {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -21px;
+  margin-top: -21px;
+  z-index: 10;
+  -webkit-transform-origin: 50%;
+  transform-origin: 50%;
+  -webkit-animation: swiper-preloader-spin 1s steps(12, end) infinite;
+  animation: swiper-preloader-spin 1s steps(12, end) infinite; }
+
+.swiper-lazy-preloader:after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%20120%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20xmlns%3Axlink%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink'%3E%3Cdefs%3E%3Cline%20id%3D'l'%20x1%3D'60'%20x2%3D'60'%20y1%3D'7'%20y2%3D'27'%20stroke%3D'%236c6c6c'%20stroke-width%3D'11'%20stroke-linecap%3D'round'%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(30%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(60%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(90%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(120%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(150%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.37'%20transform%3D'rotate(180%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.46'%20transform%3D'rotate(210%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.56'%20transform%3D'rotate(240%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.66'%20transform%3D'rotate(270%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.75'%20transform%3D'rotate(300%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.85'%20transform%3D'rotate(330%2060%2C60)'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-position: 50%;
+  background-size: 100%;
+  background-repeat: no-repeat; }
+
+.swiper-lazy-preloader-white:after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%20120%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20xmlns%3Axlink%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink'%3E%3Cdefs%3E%3Cline%20id%3D'l'%20x1%3D'60'%20x2%3D'60'%20y1%3D'7'%20y2%3D'27'%20stroke%3D'%23fff'%20stroke-width%3D'11'%20stroke-linecap%3D'round'%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(30%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(60%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(90%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(120%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(150%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.37'%20transform%3D'rotate(180%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.46'%20transform%3D'rotate(210%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.56'%20transform%3D'rotate(240%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.66'%20transform%3D'rotate(270%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.75'%20transform%3D'rotate(300%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.85'%20transform%3D'rotate(330%2060%2C60)'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+
+@-webkit-keyframes swiper-preloader-spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@keyframes swiper-preloader-spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+/* a11y */
+.swiper-container .swiper-notification {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1000; }
+
+.swiper-container-fade.swiper-container-free-mode .swiper-slide {
+  transition-timing-function: ease-out; }
+
+.swiper-container-fade .swiper-slide {
+  pointer-events: none;
+  transition-property: opacity; }
+
+.swiper-container-fade .swiper-slide .swiper-slide {
+  pointer-events: none; }
+
+.swiper-container-fade .swiper-slide-active,
+.swiper-container-fade .swiper-slide-active .swiper-slide-active {
+  pointer-events: auto; }
+
+.swiper-container-cube {
+  overflow: visible; }
+
+.swiper-container-cube .swiper-slide {
+  pointer-events: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  z-index: 1;
+  visibility: hidden;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  width: 100%;
+  height: 100%; }
+
+.swiper-container-cube .swiper-slide .swiper-slide {
+  pointer-events: none; }
+
+.swiper-container-cube.swiper-container-rtl .swiper-slide {
+  -webkit-transform-origin: 100% 0;
+  transform-origin: 100% 0; }
+
+.swiper-container-cube .swiper-slide-active,
+.swiper-container-cube .swiper-slide-active .swiper-slide-active {
+  pointer-events: auto; }
+
+.swiper-container-cube .swiper-slide-active,
+.swiper-container-cube .swiper-slide-next,
+.swiper-container-cube .swiper-slide-prev,
+.swiper-container-cube .swiper-slide-next + .swiper-slide {
+  pointer-events: auto;
+  visibility: visible; }
+
+.swiper-container-cube .swiper-slide-shadow-top,
+.swiper-container-cube .swiper-slide-shadow-bottom,
+.swiper-container-cube .swiper-slide-shadow-left,
+.swiper-container-cube .swiper-slide-shadow-right {
+  z-index: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.swiper-container-cube .swiper-cube-shadow {
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+  -webkit-filter: blur(50px);
+  filter: blur(50px);
+  z-index: 0; }
+
+.swiper-container-flip {
+  overflow: visible; }
+
+.swiper-container-flip .swiper-slide {
+  pointer-events: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  z-index: 1; }
+
+.swiper-container-flip .swiper-slide .swiper-slide {
+  pointer-events: none; }
+
+.swiper-container-flip .swiper-slide-active,
+.swiper-container-flip .swiper-slide-active .swiper-slide-active {
+  pointer-events: auto; }
+
+.swiper-container-flip .swiper-slide-shadow-top,
+.swiper-container-flip .swiper-slide-shadow-bottom,
+.swiper-container-flip .swiper-slide-shadow-left,
+.swiper-container-flip .swiper-slide-shadow-right {
+  z-index: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.swiper-container-coverflow .swiper-wrapper {
+  /* Windows 8 IE 10 fix */
+  -ms-perspective: 1200px; }
+
+.swiper-container {
+  width: 100%;
+  height: 100%; }
+
+.swiper-slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.swiper-trend.swiper-container,
+.swiper-editor.swiper-container {
+  overflow: visible; }
+  @media only screen and (max-width: 1199px) {
+    .swiper-trend.swiper-container,
+    .swiper-editor.swiper-container {
+      overflow: visible; } }
+
+@media only screen and (max-width: 576px) {
+  .swiper-trend .swiper-slide,
+  .swiper-editor .swiper-slide {
+    width: calc(100% - 60px) !important; } }
+
+.swiper-trend .box,
+.swiper-editor .box {
+  display: inline-block; }
+
+.group-swiper-button [class*="swiper-button-"] {
+  background-color: black;
+  box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+  width: 70px;
+  height: 70px;
+  background-image: none;
+  transition: all 0.3s; }
+  .group-swiper-button [class*="swiper-button-"]:hover {
+    background-color: #cc8352; }
+  .group-swiper-button [class*="swiper-button-"] .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -18px; }
+
+.group-swiper-button .swiper-button-next {
+  right: 0; }
+
+.group-swiper-button .swiper-button-prev {
+  left: 0; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+a:active, a:selected, a:visited {
+  outline: none; }
+
+a:hover {
+  text-decoration: none; }
+
+a:focus,
+.btn:focus,
+.bootstrap-select .btn:focus {
+  outline: none !important; }
+
+*:focus,
+:root input:focus {
+  /*remove dot for ie8-9*/
+  outline: none;
+  border: none; }
+
+textarea {
+  resize: none; }
+
+blockquote {
+  border: none; }
+
+blockquote small:before {
+  content: none; }
+
+label, input, button, select, textarea, input {
+  font-family: Helvetica, Thonburi, Tahoma;
+  font-weight: bold; }
+
+input[type="date"]::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; }
+
+/*Hide Spinner in Input Number*/
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
+
+address {
+  margin-bottom: 10px; }
+
+body:before,
+body:after {
+  display: table;
+  content: ""; }
+
+body:after {
+  clear: both; }
+
+ul {
+  margin-bottom: 0; }
+
+li.clearfix:after {
+  display: inline; }
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="tel"],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* mobile firefox too! */ }
+
+input::-ms-clear {
+  width: 0;
+  height: 0; }
+
+@font-face {
+  font-family: 'helvethaicaX';
+  src: url("../font/font-face/db_helvethaica_x_bd_v3_2-webfont.eot");
+  src: url("../font/font-face/db_helvethaica_x_bd_v3_2-webfont.eot?#iefix") format("embedded-opentype"), url("../font/font-face/db_helvethaica_x_bd_v3_2-webfont.woff2") format("woff2"), url("../font/font-face/db_helvethaica_x_bd_v3_2-webfont.woff") format("woff"), url("../font/font-face/db_helvethaica_x_bd_v3_2-webfont.svg#helvethaicaX") format("svg");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'helvethaicaX';
+  src: url("../font/font-face/db_helvethaica_x_med_v3_2-webfont.eot");
+  src: url("../font/font-face/db_helvethaica_x_med_v3_2-webfont.eot?#iefix") format("embedded-opentype"), url("../font/font-face/db_helvethaica_x_med_v3_2-webfont.woff2") format("woff2"), url("../font/font-face/db_helvethaica_x_med_v3_2-webfont.woff") format("woff"), url("../font/font-face/db_helvethaica_x_med_v3_2-webfont.svg#helvethaicaX") format("svg");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'helvethaicaX';
+  src: url("../font/font-face/db_helvethaica_x_v3_2-webfon.eot");
+  src: url("../font/font-face/db_helvethaica_x_v3_2-webfon.eot?#iefix") format("embedded-opentype"), url("../font/font-face/db_helvethaica_x_v3_2-webfon.woff2") format("woff2"), url("../font/font-face/db_helvethaica_x_v3_2-webfon.woff") format("woff"), url("../font/font-face/db_helvethaica_x_v3_2-webfon.svg#helvethaicaX") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'helvethaicaX';
+  src: url("../font/font-face/db_helvethaica_x_li_v3_2-webfont.eot");
+  src: url("../font/font-face/db_helvethaica_x_li_v3_2-webfont.eot?#iefix") format("embedded-opentype"), url("../font/font-face/db_helvethaica_x_li_v3_2-webfont.woff2") format("woff2"), url("../font/font-face/db_helvethaica_x_li_v3_2-webfont.woff") format("woff"), url("../font/font-face/db_helvethaica_x_li_v3_2-webfont.svg#helvethaicaX") format("svg");
+  font-weight: 100;
+  font-style: normal; }
+
+html {
+  min-width: 320px;
+  font-size: 62.5%;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  overflow-x: hidden !important; }
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  color: #000000;
+  font-family: Helvetica, Thonburi, Tahoma;
+  font-weight: normal;
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; }
+
+html {
+  position: relative;
+  min-height: 100%; }
+
+#footer {
+  background-color: #0e0e0e;
+  padding-top: 65px;
+  padding-bottom: 50px; }
+  #footer .copy-right {
+    font-family: "helvethaicaX";
+    font-weight: 200;
+    font-size: 20px;
+    font-size: 2rem; }
+  #footer .list-menu a {
+    font-family: "helvethaicaX";
+    font-weight: 300;
+    font-size: 24px;
+    font-size: 2.4rem;
+    color: white;
+    padding: 0px 15px;
+    transition: all 0.3s; }
+    #footer .list-menu a:hover {
+      color: #cc8352; }
+  #footer .list-social {
+    padding: 40px 0px; }
+    #footer .list-social a {
+      color: white;
+      padding: 0px 10px;
+      font-size: 24px; }
+
+html.chrome.ios.mobile,
+html.chrome.ios.mobile body {
+  height: 100%; }
+
+.disable-hover,
+.disable-hover * {
+  pointer-events: none !important; }
+
+html.touch .disable-focus:hover {
+  pointer-events: none !important; }
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  background-color: #FFFFFF !important;
+  color: #555 !important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #555555 !important; }
+
+label > * {
+  display: block; }
+
+#header {
+  background-color: #0e0e0e; }
+  #header .secondary {
+    padding: 20px 0px; }
+  #header .list-social a {
+    color: white;
+    padding: 0px 5px;
+    transition: all 0.3s; }
+    #header .list-social a:hover {
+      color: #cc8352; }
+  #header .tool-language {
+    font-family: "helvethaicaX";
+    font-weight: 300;
+    font-size: 24px;
+    font-size: 2.4rem;
+    color: white;
+    margin-left: 10px; }
+    #header .tool-language a {
+      color: white;
+      transition: all 0.3s; }
+      #header .tool-language a:hover, #header .tool-language a.active {
+        color: #cc8352; }
+    #header .tool-language .list-inline-item + .list-inline-item {
+      border-left: 1px solid white;
+      padding-left: 10px; }
+
+#navbar {
+  padding: 0; }
+  #navbar .main-menu {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; }
+
+.main-menu ul.navbar-nav {
+  font-family: "helvethaicaX";
+  font-weight: 300;
+  font-size: 24px;
+  font-size: 2.4rem; }
+  .main-menu ul.navbar-nav li:last-child a.nav-link {
+    padding-right: 0; }
+  .main-menu ul.navbar-nav a {
+    color: white !important;
+    transition: all 0.3s; }
+    .main-menu ul.navbar-nav a:hover, .main-menu ul.navbar-nav a.active {
+      color: #cc8352 !important; }
+
+@media only screen and (min-width: 992px) {
+  .cd-auto-hide-header {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    /* Force Hardware Acceleration */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    transition: -webkit-transform .5s;
+    transition: transform .5s;
+    transition: transform .5s, -webkit-transform .5s; }
+    .cd-auto-hide-header::after {
+      clear: both;
+      content: "";
+      display: block; }
+    .cd-auto-hide-header.is-hidden {
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%); } }
+
+@media only screen and (min-width: 1200px) {
+  .cd-auto-hide-header {
+    height: 130px; } }
+
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat; }
+  .icon-line {
+    /*
+   * Set a counter and get the length of the image path.
+   */
+    /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+    /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+    /*
+     * Set a base background for 1x environments.
+     */
+    background: url("../img/icon/icon-line.png") center center no-repeat;
+    background-size: 22px 22px;
+    /*
+     * Create an @2x-ish media query.
+     */
+    /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+    /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+    width: 22px;
+    height: 22px; }
+    @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+      .icon-line {
+        background: url("../img/icon/icon-line@2x.png") center center no-repeat;
+        background-size: 22px 22px; } }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .icon-line {
+        background: url("../img/icon/icon-line@2x.png") center center no-repeat;
+        background-size: 22px 22px; } }
+  .icon-arrow-right {
+    /*
+   * Set a counter and get the length of the image path.
+   */
+    /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+    /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+    /*
+     * Set a base background for 1x environments.
+     */
+    background: url("../img/icon/icon-arrow-right.png") center center no-repeat;
+    background-size: 8px 14px;
+    /*
+     * Create an @2x-ish media query.
+     */
+    /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+    /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+    width: 8px;
+    height: 14px; }
+    @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+      .icon-arrow-right {
+        background: url("../img/icon/icon-arrow-right@2x.png") center center no-repeat;
+        background-size: 8px 14px; } }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .icon-arrow-right {
+        background: url("../img/icon/icon-arrow-right@2x.png") center center no-repeat;
+        background-size: 8px 14px; } }
+  .icon-arrow-right-lg {
+    /*
+   * Set a counter and get the length of the image path.
+   */
+    /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+    /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+    /*
+     * Set a base background for 1x environments.
+     */
+    background: url("../img/icon/icon-arrow-right-lg.png") center center no-repeat;
+    background-size: 20px 36px;
+    /*
+     * Create an @2x-ish media query.
+     */
+    /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+    /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+    width: 20px;
+    height: 36px; }
+    @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+      .icon-arrow-right-lg {
+        background: url("../img/icon/icon-arrow-right-lg@2x.png") center center no-repeat;
+        background-size: 20px 36px; } }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .icon-arrow-right-lg {
+        background: url("../img/icon/icon-arrow-right-lg@2x.png") center center no-repeat;
+        background-size: 20px 36px; } }
+    .swiper-button-next:hover .icon-arrow-right-lg {
+      /*
+   * Set a counter and get the length of the image path.
+   */
+      /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+      /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+      /*
+     * Set a base background for 1x environments.
+     */
+      background: url("../img/icon/icon-arrow-right-lg-hover.png") center center no-repeat;
+      background-size: 20px 36px;
+      /*
+     * Create an @2x-ish media query.
+     */
+      /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+      /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+      width: 20px;
+      height: 36px; }
+      @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+        .swiper-button-next:hover .icon-arrow-right-lg {
+          background: url("../img/icon/icon-arrow-right-lg-hover@2x.png") center center no-repeat;
+          background-size: 20px 36px; } }
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .swiper-button-next:hover .icon-arrow-right-lg {
+          background: url("../img/icon/icon-arrow-right-lg-hover@2x.png") center center no-repeat;
+          background-size: 20px 36px; } }
+  .icon-arrow-left-lg {
+    /*
+   * Set a counter and get the length of the image path.
+   */
+    /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+    /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+    /*
+     * Set a base background for 1x environments.
+     */
+    background: url("../img/icon/icon-arrow-left-lg.png") center center no-repeat;
+    background-size: 20px 38px;
+    /*
+     * Create an @2x-ish media query.
+     */
+    /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+    /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+    width: 20px;
+    height: 38px; }
+    @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+      .icon-arrow-left-lg {
+        background: url("../img/icon/icon-arrow-left-lg@2x.png") center center no-repeat;
+        background-size: 20px 38px; } }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .icon-arrow-left-lg {
+        background: url("../img/icon/icon-arrow-left-lg@2x.png") center center no-repeat;
+        background-size: 20px 38px; } }
+    .swiper-button-prev:hover .icon-arrow-left-lg {
+      /*
+   * Set a counter and get the length of the image path.
+   */
+      /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+      /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+      /*
+     * Set a base background for 1x environments.
+     */
+      background: url("../img/icon/icon-arrow-left-lg-hover.png") center center no-repeat;
+      background-size: 20px 38px;
+      /*
+     * Create an @2x-ish media query.
+     */
+      /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+      /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+      width: 20px;
+      height: 38px; }
+      @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+        .swiper-button-prev:hover .icon-arrow-left-lg {
+          background: url("../img/icon/icon-arrow-left-lg-hover@2x.png") center center no-repeat;
+          background-size: 20px 38px; } }
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .swiper-button-prev:hover .icon-arrow-left-lg {
+          background: url("../img/icon/icon-arrow-left-lg-hover@2x.png") center center no-repeat;
+          background-size: 20px 38px; } }
+  .icon-popular {
+    /*
+   * Set a counter and get the length of the image path.
+   */
+    /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+    /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+    /*
+     * Set a base background for 1x environments.
+     */
+    background: url("../img/icon/icon-popular.png") center center no-repeat;
+    background-size: 25px 29px;
+    /*
+     * Create an @2x-ish media query.
+     */
+    /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+    /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+    width: 25px;
+    height: 29px; }
+    @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+      .icon-popular {
+        background: url("../img/icon/icon-popular@2x.png") center center no-repeat;
+        background-size: 25px 29px; } }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .icon-popular {
+        background: url("../img/icon/icon-popular@2x.png") center center no-repeat;
+        background-size: 25px 29px; } }
+  .icon-play {
+    /*
+   * Set a counter and get the length of the image path.
+   */
+    /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+    /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+    /*
+     * Set a base background for 1x environments.
+     */
+    background: url("../img/icon/icon-play.png") center center no-repeat;
+    background-size: 110px 78px;
+    /*
+     * Create an @2x-ish media query.
+     */
+    /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+    /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+    width: 110px;
+    height: 78px; }
+    @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+      .icon-play {
+        background: url("../img/icon/icon-play@2x.png") center center no-repeat;
+        background-size: 110px 78px; } }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .icon-play {
+        background: url("../img/icon/icon-play@2x.png") center center no-repeat;
+        background-size: 110px 78px; } }
+  .icon-search {
+    /*
+   * Set a counter and get the length of the image path.
+   */
+    /*
+   * Loop ver the image path and figure out the
+   * position of the dot where the extension begins.
+   */
+    /*
+   * If we were able to figure out where the extension is,
+   * slice the path into a base and an extension. Use that to
+   * calculate urls for different density environments. Set
+   * values for different environments.
+   */
+    /*
+     * Set a base background for 1x environments.
+     */
+    background: url("../img/icon/icon-search.png") center center no-repeat;
+    background-size: 16px 20px;
+    /*
+     * Create an @2x-ish media query.
+     */
+    /*
+     * Create media queries for all environments that the user has
+     * provided images for.
+     */
+    /*
+   * If anything went wrong trying to separate the file from its
+   * extension, set a background value without doing anything to it.
+   */
+    width: 16px;
+    height: 20px; }
+    @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+      .icon-search {
+        background: url("../img/icon/icon-search@2x.png") center center no-repeat;
+        background-size: 16px 20px; } }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .icon-search {
+        background: url("../img/icon/icon-search@2x.png") center center no-repeat;
+        background-size: 16px 20px; } }
+
+.list-author-by {
+  font-family: "helvethaicaX";
+  font-weight: 100;
+  font-size: 24px;
+  font-size: 2.4rem;
+  color: white; }
+  .list-author-by li + li {
+    border-left: 1px solid white;
+    padding-left: 10px; }
+  .list-author-by .name,
+  .list-author-by .day {
+    color: #cc8352; }
+
+.listing-card ._card + ._card {
+  margin-top: 20px; }
+
+._card {
+  position: relative; }
+  ._card .thumb {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: #eeeeee; }
+    ._card .thumb .sign-number {
+      position: absolute;
+      z-index: 10;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      background-color: #0e0e0e;
+      left: 0;
+      top: 0;
+      font-family: "helvethaicaX";
+      font-weight: 400;
+      font-size: 60px;
+      font-size: 6rem;
+      color: #f7b787;
+      font-style: normal;
+      text-align: center; }
+    ._card .thumb.zoom {
+      padding-bottom: 57%;
+      width: 100%; }
+    ._card .thumb .parent {
+      display: block;
+      width: 100%; }
+    ._card .thumb .img-photo {
+      display: block;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      position: relative;
+      width: 100%;
+      margin: 0 auto; }
+  ._card .cat {
+    color: white;
+    font-family: "helvethaicaX";
+    font-weight: 100;
+    font-size: 24px;
+    font-size: 2.4rem; }
+    @media only screen and (max-width: 767px) {
+      ._card .cat {
+        font-size: 12px;
+        font-size: 1.2rem; } }
+  ._card .title {
+    margin-bottom: 10px; }
+    ._card .title a {
+      color: white; }
+      ._card .title a:hover {
+        color: #cc8352; }
+    @media only screen and (max-width: 991px) {
+      ._card .title {
+        font-size: 26px;
+        font-size: 2.6rem; } }
+    @media only screen and (max-width: 767px) {
+      ._card .title {
+        font-size: 18px;
+        font-size: 1.8rem; } }
+  ._card._border-bottom {
+    border-bottom: 1px solid #707070; }
+  ._card._card-row .info {
+    padding: 10px 0px; }
+  @media only screen and (min-width: 992px) {
+    ._card._card-row .title {
+      font-size: 30px;
+      font-size: 3rem; } }
+  ._card._card-column .thumb {
+    max-width: 498px; }
+    .section-highlight ._card._card-column .thumb {
+      max-width: 100%; }
+  ._card._card-column._size-big .info {
+    padding-top: 20px;
+    padding-right: 20px; }
+    @media only screen and (min-width: 1200px) {
+      ._card._card-column._size-big .info {
+        padding-top: 40px;
+        padding-right: 40px; } }
+    @media only screen and (max-width: 991px) {
+      ._card._card-column._size-big .info {
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px; } }
+  .section-highlight ._card._card-column .info {
+    padding-left: 40px; }
+    @media only screen and (max-width: 991px) {
+      .section-highlight ._card._card-column .info {
+        padding-left: 10px; } }
+  ._card._card-popular .thumb {
+    margin-bottom: 5px; }
+  ._card._card-popular .cat {
+    font-size: 18px;
+    font-size: 1.8rem; }
+  ._card._card-popular .title {
+    font-size: 24px;
+    font-size: 2.4rem;
+    font-weight: 300;
+    margin-bottom: 0; }
+  ._card._card-content {
+    background-color: #1e1e1e;
+    display: inline-block;
+    padding: 20px;
+    transition: all 0.3s;
+    width: 100%; }
+    ._card._card-content a:hover {
+      color: white; }
+    ._card._card-content:hover {
+      background-color: #cc8352; }
+      ._card._card-content:hover .img-photo:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        background-color: rgba(216, 143, 91, 0.23); }
+      ._card._card-content:hover .img-photo:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background: #000000;
+        background: linear-gradient(180deg, #000000 0%, #ffffff 100%);
+        opacity: 0.2; }
+    @media only screen and (max-width: 767px) {
+      ._card._card-content {
+        padding: 15px; } }
+    ._card._card-content .thumb {
+      margin-bottom: 20px; }
+      ._card._card-content .thumb .icon {
+        position: absolute;
+        z-index: 20;
+        left: 50%;
+        top: 50%;
+        margin-top: -39px;
+        margin-left: -55px; }
+    ._card._card-content .title {
+      font-size: 30px;
+      font-size: 3rem; }
+
+.button,
+a.button {
+  min-height: 50px;
+  color: white;
+  font-family: "helvethaicaX";
+  font-weight: 200;
+  font-size: 30px;
+  font-size: 3rem;
+  transition: all 0.3s;
+  display: inline-block; }
+  .button._size-m,
+  a.button._size-m {
+    min-height: 62px; }
+  .button-outline,
+  a.button-outline {
+    border: 1px solid white;
+    padding: 9px 30px;
+    background-color: transparent;
+    background-color: transparent; }
+    .button-outline .icon,
+    a.button-outline .icon {
+      margin-left: 20px; }
+    .button-outline:hover,
+    a.button-outline:hover {
+      background-color: #cc8352;
+      cursor: pointer;
+      border: 1px solid #cc8352; }
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    min-width: 1240px; } }
+
+.footer-button {
+  padding-top: 40px;
+  text-align: center; }
+
+.section-highlight {
+  margin-bottom: 20px; }
+
+.section-most-popular {
+  padding: 20px; }
+  .section-most-popular header {
+    border-bottom: 1px solid white;
+    padding-bottom: 12px;
+    margin-bottom: 20px; }
+    .section-most-popular header .title .icon {
+      margin-right: 20px; }
+  .section-most-popular .listing-card ._card + ._card {
+    margin-top: 10px; }
+
+.section-news .listing-card ._card {
+  padding-bottom: 10px;
+  margin-bottom: 10px; }
+
+._section {
+  padding: 40px 0px; }
+  @media only screen and (max-width: 767px) {
+    ._section {
+      padding: 20px 0px; } }
+  ._section-title {
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+    color: white;
+    text-align: center;
+    font-weight: 200;
+    margin-bottom: 40px;
+    overflow: hidden; }
+    @media only screen and (max-width: 767px) {
+      ._section-title {
+        font-weight: 100;
+        font-size: 40px;
+        font-size: 4rem;
+        margin-bottom: 15px; } }
+    ._section-title:before, ._section-title:after {
+      background-color: white;
+      content: "";
+      display: inline-block;
+      height: 1px;
+      position: relative;
+      vertical-align: middle;
+      width: 45.5%; }
+    ._section-title:before {
+      right: 20px;
+      margin-left: -50%; }
+    ._section-title:after {
+      left: 20px;
+      margin-right: -50%; }
+    ._section-title .name {
+      padding: 0px 10px;
+      display: inline-block; }
+
+.form-subscribe {
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: hidden; }
+  .form-subscribe input[type="email"] {
+    border-bottom: 0px;
+    text-align: center;
+    width: 100%; }
+  .form-subscribe .form-group {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccbaa8; }
+  .form-subscribe .group-button {
+    margin-top: 30px; }
+
+/*# sourceMappingURL=main.css.map */

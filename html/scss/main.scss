@@ -1,0 +1,33 @@
+/*------------------------------------*\
+		# primary Sass file
+
+		## doc scss
+		http://github.com/paranoida/sass-mediaqueries
+		http://bourbon.io/docs/
+\*------------------------------------*/
+
+// bower:scss
+@import "../bower_components/sass-mediaqueries/_media-queries.scss";
+@import "../bower_components/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "../bower_components/retinajs/src/_retina.scss";
+// endbower
+
+// Core variables and mixins
+@import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables';
+@import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+
+
+// mixin, function, helper class, variable
+@import 'helpers/helpers';
+
+// Overwrite plugins
+@import 'plugins/plugins';
+
+// reset, fonts, default styles
+@import 'base/base';
+
+// All custom styles element (button, input etc...)
+@import 'components/components';
+
+// Specific page styles
+@import 'views/views';

@@ -1,0 +1,160 @@
+html{
+	min-width: 320px;
+	font-size: 62.5%;
+	touch-action: manipulation;
+
+	-webkit-overflow-scrolling : touch;
+	-webkit-tap-highlight-color : transparent;
+	-webkit-text-size-adjust : 100%;
+	-ms-text-size-adjust : 100%;
+  overflow-x: hidden !important;
+}
+
+body{
+	margin : 0;
+	padding : 0;
+	width : 100%;
+	color: $basecolor;
+	font-family: $basefont;
+	font-weight: normal;
+	@include font-size($basefontsize);
+	line-height: 1;
+
+	//font thin for firefox
+	-moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  html.windows &{
+    font-family: $winbasefont;
+  }
+}
+
+// sticky footer
+// -------------------------
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+
+}
+
+#main{
+  overflow-x: hidden !important;
+
+  padding-top: 180px;
+
+  @include max-screen(1199px){
+    padding-top: 100px;
+  }
+
+  &._bg-marble{
+    &:before{
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('#{$path-img}/bg-section.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+#footer {
+  background-color: #0e0e0e;
+  padding-top: 65px;
+  padding-bottom: 50px;
+
+  @include max-screen(767px){
+    padding-top: 0;
+    padding-bottom: 30px;
+  }
+
+  .copy-right{
+    font-family: $brandfont;
+    font-weight: 200;
+    @include font-size(20);
+  }
+
+  .list-menu{
+    a{
+      font-family: $brandfont;
+      font-weight: 300;
+      @include font-size(24);
+      color: $white;
+      padding: 0px 8px;
+      @include transition(all $transition);
+
+      @include min-screen(1200px){
+        padding: 0px 15px;
+      }
+
+      &:hover{
+        color: $brand-color;
+      }
+    }
+
+    .list-inline-item{
+      padding: 5px 0px;
+    }
+  }
+
+  .list-social{
+    padding: 40px 0px;
+
+    @include max-screen(767px){
+      padding: 30px 0px;
+    }
+
+    a{
+      color: $white;
+      padding: 0px 10px;
+      font-size: 24px;
+    }
+  }
+}
+
+
+//bug position:fixed scroll gutter in chrome
+html.chrome.ios.mobile,
+html.chrome.ios.mobile body {
+	height:100%;
+}
+
+// disable :hover when scrolling on mobile
+.disable-hover,
+.disable-hover * {
+  pointer-events: none !important;
+}
+
+// Disable hover effects pause
+html.touch .disable-focus:hover {
+    pointer-events: none !important;
+}
+
+
+// Disable background yellow
+input:-webkit-autofill{
+	  &,
+	  &:hover,
+	  &:focus,
+	  &:active{
+	    background-color: #FFFFFF !important;
+	    color: #555 !important;
+	    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+	    -webkit-text-fill-color: #555555 !important;
+	}
+}
+
+label > * {
+    display: block;
+    // pointer-events: none;
+}
+
