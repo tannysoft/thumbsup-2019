@@ -19,16 +19,123 @@
 	<?php if (function_exists('customize_ini')) {customize_ini();} ?>
 </head>
 
-<?php $bodyClass = ''; if (is_active_sidebar( 'headbar' )) { $bodyClass = 'has-headbar'; } ?>
-
-<body <?php body_class($bodyClass); ?>>
+<body <?php body_class(); ?>>
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'plant' ); ?></a>
-	<div id="page" class="site -layout-<?php echo $GLOBALS['s_layout']; ?> -header-mobile-<?php echo $GLOBALS['s_header_mobile']; ?> -header-desktop-<?php echo $GLOBALS['s_header_desktop']; ?> -menu-<?php echo $GLOBALS['s_menu']; ?> -menu-icon-<?php echo $GLOBALS['s_menu_icon'] ; ?> -shop-layout-<?php echo $GLOBALS['s_shop_layout']; ?>">
+	<div id="page" class="site">
 		
-		<nav id="site-mobile-navigation" class="site-mobile-navigation <?php if($GLOBALS['s_menu'] == 'off-canvas') { echo 'sb-slidebar sb-right'; } else { echo '-dropdown'; } ?> _mobile _heading">
+		<?php /*<nav id="site-mobile-navigation" class="site-mobile-navigation <?php if($GLOBALS['s_menu'] == 'off-canvas') { echo 'sb-slidebar sb-right'; } else { echo '-dropdown'; } ?> _mobile _heading">
 			<?php wp_nav_menu( array( 'theme_location' => 'mobile', 'menu_id' => 'mobile-menu' ) ); ?>
 			<?php if(is_active_sidebar('top-right')) { ?><div class="mobile-widget"><?php dynamic_sidebar( 'top-right' ); ?></div><?php } ?>
-		</nav>
+		</nav>*/ ?>
+
+		<header id="header">
+			<section class="secondary text-right d-none d-xl-block">
+			<div class="container">
+				<ul class="list-inline">
+				<li class="list-inline-item">
+					<ul class="list-social list-inline">
+					<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+					</ul>
+				</li>
+				<li class="list-inline-item">
+					<ul class="list-inline tool-language">
+					<li class="list-inline-item"><a href="#" class="active">ไทย</a></li>
+					<li class="list-inline-item"><a href="#">ENG</a></li>
+					</ul>
+				</li>
+				</ul>
+			</div>
+			</section>
+
+			<!--  Hamburger menu icon -->
+			<section class="menu-sticky">
+			<div class="container d-block d-xl-none" style="position: relative;">
+				<div id="wstoggle"><span></span></div>
+			</div>
+			</section>
+			<!--  Hamburger menu icon -->
+
+			<section class="primary header-sticky">
+			<div class="container">
+				<nav id="navbar" class="navbar navbar-expand-xl navbar-light">
+					<a class="navbar-brand" href="javascript:void(0);">
+					<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+					<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+					</a>
+
+					<div class="main-menu collapse navbar-collapse d-none d-xl-block">
+					<div class="group-nav navbar-right">
+						<ul class="navbar-nav mr-auto text-uppercase">
+						<li class="nav-item active">
+							<a class="nav-link" href="javascript:void(0);">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							News
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="javascript:void(0);">Action</a>
+							<a class="dropdown-item" href="javascript:void(0);">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:void(0);">EVENTS & CONFERENCES</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:void(0);">ABOUT US</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:void(0);">CONTACT</a>
+						</li>
+						<li class="nav-item show-went-scroll">
+							<ul class="list-inline">
+							<li class="list-inline-item">
+								<ul class="list-social list-inline">
+								<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+								</ul>
+							</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:void(0);"><i class="icon icon-search"></i></a>
+							</li>
+						</ul>
+					</div>
+					</div>
+				</nav>
+			</div>
+			</section>
+
+			<!-- menu mobile -->
+			<nav class="wsfullmain clearfix d-block d-xl-none">
+				<div class="wsf-halfpart wsfleftpart _bg-section" style="background-image: url(img/bg-section.jpg); background-color: black;">
+				<div class="wsfrightpart-inner clearfix">
+					<ul class="wsfbiglink">
+					<li><a href="javascript:void(0)">Home</a></li>
+					<li><a href="javascript:void(0)">news</a></li>
+					<li><a href="javascript:void(0)">events & conferences</a></li>
+					<li><a href="javascript:void(0)">about us</a></li>
+					<li><a href="javascript:void(0)">contact</a></li>
+					<li>
+						<ul class="list-inline tool-language">
+							<li class="list-inline-item"><a href="#" class="active">ไทย</a></li>
+							<li class="list-inline-item"><a href="#">ENG</a></li>
+						</ul>
+					</li>
+					</ul>
+				</div>
+				</div>
+			</nav>
+			<!-- /menu mobile -->
+		</header>
 		
 		<header id="masthead" class="site-header sb-slide _heading" data-seed-scroll="<?php echo $GLOBALS['s_scroll']; ?>">
 			<div class="container">
@@ -50,15 +157,6 @@
 				<a class="site-toggle <?php if($GLOBALS['s_menu'] == 'off-canvas') { echo 'sb-toggle-right'; } ?> _mobile">
 					<i><span></span><span></span><span></span><span></span></i><b><?php echo $GLOBALS['s_menu_text']; ?></b>
 				</a>
-
-				<?php if ($bodyClass == 'has-headbar'): ?>
-					<div id="headbar" class="_desktop"><?php dynamic_sidebar( 'headbar' ); ?></div>
-				<?php else: ?>
-					<div class="site-top-right _desktop"><?php dynamic_sidebar( 'top-right' ); ?></div>
-					<nav id="site-desktop-navigation" class="site-desktop-navigation _desktop">
-						<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-					</nav>
-				<?php endif; ?>
 				
 			</div>
 		</header>

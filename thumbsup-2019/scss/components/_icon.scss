@@ -1,0 +1,50 @@
+.icon{
+	display: inline-block;
+	background-repeat: no-repeat;
+
+	&-line{
+		@include retina('#{$path-icon}/icon-line.png', 2, 22px 22px, center center no-repeat);
+		@include size(22px, 22px);
+  }
+
+  &-arrow-right{
+		@include retina('#{$path-icon}/icon-arrow-right.png', 2, 8px 14px, center center no-repeat);
+		@include size(8px, 14px);
+  }
+
+  &-arrow-right-lg{
+		@include retina('#{$path-icon}/icon-arrow-right-lg.png', 2, 20px 36px, center center no-repeat);
+    @include size(20px, 36px);
+
+    .swiper-button-next:hover &{
+      @include retina('#{$path-icon}/icon-arrow-right-lg-hover.png', 2, 20px 36px, center center no-repeat);
+      @include size(20px, 36px);
+    }
+  }
+
+  &-arrow-left-lg{
+		@include retina('#{$path-icon}/icon-arrow-left-lg.png', 2, 20px 38px, center center no-repeat);
+    @include size(20px, 38px);
+
+    .swiper-button-prev:hover &{
+      @include retina('#{$path-icon}/icon-arrow-left-lg-hover.png', 2, 20px 38px, center center no-repeat);
+      @include size(20px, 38px);
+    }
+  }
+
+  &-popular{
+		@include retina('#{$path-icon}/icon-popular.png', 2, 25px 29px, center center no-repeat);
+		@include size(25px, 29px);
+  }
+
+  &-play{
+		@include retina('#{$path-icon}/icon-play.png', 2, 110px 78px, center center no-repeat);
+		@include size(110px, 78px);
+  }
+
+  &-search{
+    @include retina('#{$path-icon}/icon-search.png', 2, 16px 20px, center center no-repeat);
+		@include size(16px, 20px);
+  }
+
+}

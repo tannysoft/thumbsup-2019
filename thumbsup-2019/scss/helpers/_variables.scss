@@ -1,0 +1,83 @@
+// 1. ROOT 					==============================
+$path-font              : '../font/font-face';
+$path-img               : '../img';
+$path-icon              : '../img/icon';
+$icon-font-path			: '../font';
+
+// $width-container        : 1180px;
+$transition             : .3s;
+
+$screen-small   : 576px; // (≥576px) small screen / phone
+$screen-extra-small   : 575px; // (<575) Extra small screen / phone
+
+
+$weight-light: 100;
+$weight-regular : normal;
+$weight-medium : 300;
+$weight-bold : 400;
+
+$brand-color   : #cc8352;
+$bg-body-color : #ffffff;
+$basecolor 		: #000000;
+
+$brand-youtube: #cd201f;
+$brand-facebook: #3b5998;
+$brand-twitter: #1da1f2;
+$brand-line: #00c300;
+
+// 2. TYPOGRAPHY 			==============================
+$basefont :  Helvetica, Thonburi, Tahoma;
+$brandfont : "helvethaicaX";
+$basefontsize : 18;
+$baselineheight : 1.35em;
+
+$altfont : Helvetica, Arial, sans-serif;
+$altlineheight : 1.35em;
+
+$winbasefont : Arial, Tahoma;
+$codefont : Monaco, Courier New, monospace;
+
+// 3. COLOUR 				==============================
+$compcolor 		: spin($basecolor, 180);
+$bordercolor    : #cccccc;
+$borderformcolor: #e6e6e6;
+
+// Brand
+$brown-color      : #cc8352;
+$gray-color       : #4B4B4B;
+
+// Links
+$linkcolor 		    : $brand-color;
+$linkcolorhover 	: darken($brand-color, 10);
+$linkcolorvisited   : $brand-color; //darken($linkcolorhover, 10);
+$linkcolorfocus 	: $brand-color; //darken($linkcolorvisited, 10);
+
+// greyscale
+$black 			: rgb(0,0,0);
+$darkgrey 		: lighten($black, 25%);
+$grey 			: #666666; //lighten($black, 50%);
+$grey-bg      	: #F4F7F9;
+$lightgrey 		: lighten($black, 75%);
+$lightergrey 	: lighten($black, 90%);
+$lightergreys 	: lighten($black, 91%);
+$white 			: rgb(255,255,255);
+
+// colour palettes
+$alertcolor 	: rgb(252,248,227);
+$errorcolor 	: #F10000;
+$infocolor 		: rgb(217,237,247);
+$inverscolor 	: rgb(65,65,65);
+$successcolor 	: rgb(91,183,91);
+$warningcolor 	: rgb(250,167,50);
+
+// buttons
+$buttonbackground 	: #d1242b;
+$buttonbordercolor 	: darken($buttonbackground, 10%);
+$buttonbottombordercolor : darken($buttonbordercolor, 10%);
+$buttoncolor 		    : $white;
+$buttonborderwidth	: 1px;
+$buttonborderstyle	: solid;
+
+// input
+$placeholder-color  : #999;
+$bg-input           : #ffffff;
