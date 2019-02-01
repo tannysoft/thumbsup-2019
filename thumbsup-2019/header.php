@@ -136,7 +136,7 @@
 			</nav>
 			<!-- /menu mobile -->
 		</header>
-		
+		<?php /*
 		<header id="masthead" class="site-header sb-slide _heading" data-seed-scroll="<?php echo $GLOBALS['s_scroll']; ?>">
 			<div class="container">
 				
@@ -159,7 +159,7 @@
 				</a>
 				
 			</div>
-		</header>
+		</header>*/ ?>
 
 		<div id="sb-site" class="site-canvas">
 			<div class="site-header-space"></div>
