@@ -70,6 +70,22 @@ body{
     -o-background-size: cover;
     background-size: cover;
  }
+ .carousel-caption {
+     top:40%;
+     text-align: left;
+ }
+ .carousel-caption h3 {
+     font-size: 70px;
+     color: #ce834d;
+     font-family: "helvethaicaX";
+     line-height: 70px;
+ }
+ .carousel-caption p {
+    font-size: 40px;
+    color:#fff;
+    font-family: "helvethaicaX";
+    font-weight: 100;
+ }
  #section-popular{
     background-size: cover;
     /* padding: 115px 0 50px; */
@@ -258,9 +274,7 @@ body{
   }
 
   .carousel-caption {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: .5rem;
+    text-align: left;
   }
 
 

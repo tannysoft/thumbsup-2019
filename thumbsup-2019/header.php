@@ -162,7 +162,7 @@
 		</header>*/ ?>
 
 		<div id="sb-site" class="site-canvas">
-			<div class="site-header-space"></div>
+
 			<?php 
 			if (is_front_page()) {
 				if (is_active_sidebar( 'home_banner' )) {

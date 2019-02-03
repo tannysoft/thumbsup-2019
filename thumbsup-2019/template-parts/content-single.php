@@ -4,18 +4,30 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('content-single'); ?>>
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-
-		<?php if ( 'post' === get_post_type() ) : ?>
-			<div class="entry-meta">
-				<?php seed_posted_on(); ?>
+<article id="post-<?php the_ID(); ?>" <?php post_class('content-single template-article _section _border-bottom'); ?>>
+	<header class="entry-header header">
+		<div class="row">
+			<div class="col-md-6">
+			<?php if ( 'post' === get_post_type() ) : ?>
+				<div class="entry-meta info">
+					<?php seed_posted_on(); ?>
+				</div>
+			<?php endif; ?>
 			</div>
-		<?php endif; ?>
+			<div class="col-md-6 d-flex align-items-center justify-content-start justify-content-md-end">
+			<div class="list-social-share list-inline"><span class="title">Share</span><?php if(function_exists('seed_social')) {seed_social();} ?></div>
+			<?php /*<ul class="list-social-share list-inline">
+				<li class="list-inline-item"><span class="text">Share</span></li>
+				<li class="list-inline-item"><a href="#" class="-facebook" rel="border-circle"><i class="fab fa-facebook-f"></i></a></li>
+				<li class="list-inline-item"><a href="#" class="-twitter" rel="border-circle"><i class="fab fa-twitter"></i></a></li>
+				<li class="list-inline-item"><a href="#" class="-line" rel="border-circle"><i class="icon icon-line"></i></a></li>
+			</ul>*/ ?>
+			</div>
+		</div>
+		<?php the_title( '<h1 class="entry-title d-none">', '</h1>' ); ?>
 	</header>
 
-	<div class="entry-content">
+	<div class="entry-content content-editor">
 		<?php the_content(); ?>
 		<?php wp_link_pages( array('before' => '<div class="page-links">' . esc_html__( 'Pages:', 'plant' ),'after'  => '</div>') ); ?>
 
@@ -32,7 +44,16 @@
 		<?php endif; ?>
 	</div>
 
-	<footer class="entry-footer">
+	<footer class="entry-footer footer">
+		<?php if(has_tag()) : ?>
+		<ul class="list-tag list-inline">
+			<?php $t = wp_get_post_tags(get_the_ID()); ?>
+			<li class="list-inline-item"><span class="title">Tag:</span></li>
+			<?php foreach ($t as $value): ?>
+			<li class="list-inline-item"><a href="<?php echo get_tag_link($value->term_id); ?>"><?php echo $value->name; ?></a></li>
+			<?php endforeach; ?>
+		</ul>
+		<?php endif; ?>
 		<?php seed_entry_footer(); ?>
 	</footer>
 </article>

@@ -417,3 +417,18 @@ function plant_register_required_plugins() {
 }
 if( class_exists('Kirki') ) { include_once( dirname( __FILE__ ) . '/inc/kirki.php' );}
 */
+
+// Add filter to respond with next and previous post in post response.
+add_filter( 'rest_prepare_post', function( $response, $post, $request ) {
+
+	global $post;
+	// Get the so-called next post.
+	$next = get_adjacent_post( false, '', false );
+	// Get the so-called previous post.
+	$previous = get_adjacent_post( false, '', true );
+	// Format them a bit and only send id and slug (or null, if there is no next/previous post).
+	$response->data['next'] = ( is_a( $next, 'WP_Post') ) ? array( "id" => $next->ID, "link" => get_the_permalink($next->ID) ) : null;
+	$response->data['previous'] = ( is_a( $previous, 'WP_Post') ) ? array( "id" => $previous->ID, "link" => get_the_permalink($previous->ID) ) : null;
+  
+	return $response;
+}, 10, 3 );

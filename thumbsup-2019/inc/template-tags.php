@@ -12,6 +12,20 @@ if ( ! function_exists( 'seed_posted_on' ) ) :
  * Prints HTML with meta information for the current post-date/time and author.
  */
 function seed_posted_on() {
+
+	if ( 'post' === get_post_type() ) {
+		/* translators: used between list items, there is a space after the comma */
+		$categories_list = get_the_category_list( esc_html__( ', ', 'plant' ) );
+		if ( $categories_list ) {
+			printf( '<span class="cat-links cat text-uppercase"><i class="si-folder"></i>' . esc_html__( '%1$s', 'plant' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+		}
+		/* translators: used between list items, there is a space after the comma */
+		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'plant' ) );
+		if ( $tags_list ) {
+			printf( '<span class="tags-links"><i class="si-tag"></i>' . esc_html__( '%1$s', 'plant' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+		}
+	}
+
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
@@ -26,28 +40,16 @@ function seed_posted_on() {
 
 	$posted_on = sprintf(
 		esc_html_x( '%s', 'post date', 'plant' ),
-		'<i class="si-clock"></i><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
 
 	$byline = sprintf(
 		esc_html_x( '%s', 'post author', 'plant' ),
-		'<span class="author vcard"><i class="si-user"></i><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+		'<span class="author vcard name">Writer: <a class="url fn n color-brand" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline">' . $byline . '</span>'; // WPCS: XSS OK.
+	echo '<span class="byline">' . $byline . '</span><span class="posted-on day">' . $posted_on . '</span>'; // WPCS: XSS OK.
 
-	if ( 'post' === get_post_type() ) {
-		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ', ', 'plant' ) );
-		if ( $categories_list ) {
-			printf( '<span class="cat-links"><i class="si-folder"></i>' . esc_html__( '%1$s', 'plant' ) . '</span>', $categories_list ); // WPCS: XSS OK.
-		}
-		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'plant' ) );
-		if ( $tags_list ) {
-			printf( '<span class="tags-links"><i class="si-tag"></i>' . esc_html__( '%1$s', 'plant' ) . '</span>', $tags_list ); // WPCS: XSS OK.
-		}
-	}
 
 }
 endif;
