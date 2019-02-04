@@ -57,17 +57,10 @@ body {
   z-index: 1;
   width: 100vw;
   height: 100vh;
-  transition: .2s;
 }
 
 .content-carousel-container.end {
   transition: none;
-}
-
-.content-carousel-container.on-scroll {
-  transform: translateX(0) !important;
-  -moz-transform: translateX(0) !important;
-  -webkit-transform: translateX(0) !important;
 }
 
 .content-carousel-item {
