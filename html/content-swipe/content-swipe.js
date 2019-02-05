@@ -6,6 +6,7 @@
 
 var __data = {
   id: 81,
+  content: null,
   previous: null,
   next: null,
 };
@@ -19,14 +20,17 @@ var fetchAndBuildItem = function(currentId, callback) {
   var _resp = null
 
   $.ajax({
-    url: 'http://thumbsup.tan.cloud/wp-json/wp/v2/posts/' + currentId,
+    // url: 'http://thumbsup.tan.cloud/wp-json/wp/v2/posts/' + currentId,
+    url: 'http://thumbsup.tan.cloud/index.php?rest_route=/wp/v2/posts/' + currentId,
   })
     .done(function(resp) {
+      console.log(resp);
       // console.log('CurrentID:', currentId, resp);
       _resp = resp
 
       __data = {
         id: resp.id,
+        content: resp.content.rendered,
         previous: resp.previous,
         next: resp.next,
       };
@@ -105,9 +109,6 @@ function afterSlideEnd(direction) {
   fetchAndBuildItem(currentId, function() {
     $container.removeClass('end');
     busy = false;
-
-    // NOTE: For debug
-    // $container.find('.content-carousel-item.current header').prepend(__data.id);
   });
 }
 
@@ -156,6 +157,9 @@ function adjustPreviousItem(data) {
 
     var $prevItem = $container.find('.content-carousel-item.prev');
 
+    // NOTE: For debug
+    $prevItem.find('.content-editor:first').prepend(data.content);
+
     if ($prevItem.length === 0) {
       $container.prepend(
         '<div class="content-carousel-item prev">' +
@@ -186,6 +190,10 @@ function adjustNextItem(data) {
     var nextContent = $(div).find('#main').parent().html();
 
     var $nextItem = $container.find('.content-carousel-item.next');
+
+    // NOTE: For debug
+    console.log($nextItem);
+    $nextItem.find('.content-editor:first').prepend(data.content);
 
     if ($nextItem.length === 0) {
       $container.append(
