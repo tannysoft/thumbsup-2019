@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="format-detection" content="telephone=no, date=no, address=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
   <title>Thumbs Up</title>
 
   <!-- Bootstrap core CSS -->
-  <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
     crossorigin="anonymous">
 
@@ -55,26 +56,133 @@
     <section class="primary header-sticky">
       <div class="container">
         <nav id="navbar" class="navbar navbar-expand-xl navbar-light">
+          <div class="d-block d-xl-none">
             <a class="navbar-brand" href="javascript:void(0);">
               <span class="d-none d-md-block"><img src="img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
               <span class="d-sm-block d-md-none"><img src="img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
             </a>
+          </div>
 
             <div class="main-menu collapse navbar-collapse d-none d-xl-block">
-              <div class="group-nav navbar-right">
-                <ul class="navbar-nav mr-auto text-uppercase">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="javascript:void(0);">Home <span class="sr-only">(current)</span></a>
+              <div class="wsmenu group-nav navbar-right">
+                <ul class="wsmenu-list navbar-nav mr-auto text-uppercase text-nowrap">
+                  <li class="logo-brand">
+                      <a class="navbar-brand" href="javascript:void(0);">
+                          <span class="d-none d-md-block"><img src="img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+                          <span class="d-sm-block d-md-none"><img src="img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+                        </a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      News
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="javascript:void(0);">Action</a>
-                      <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);">Home</a>
+                  </li>
+                  <li class="nav-item" aria-haspopup="true"><a href="news.html" onclick="close(); return false">News<span class="wsarrow"></span></a>
+                    <div class="wsmegamenu clearfix">
+                      <div class="row no-gutters">
+                          <div class="col-2">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                              <a class="nav-link active" id="v-pills-news-tab" data-toggle="pill" href="#v-pills-news" role="tab" aria-controls="v-pills-news" aria-selected="true">PR NEWS</a>
+                              <a class="nav-link" id="v-pills-digital-tab" data-toggle="pill" href="#v-pills-digital" role="tab" aria-controls="v-pills-digital" aria-selected="false">DIGITAL</a>
+                              <a class="nav-link" id="v-pills-tech-tab" data-toggle="pill" href="#v-pills-tech" role="tab" aria-controls="v-pills-tech" aria-selected="false">TECHNOLOGY</a>
+                              <a class="nav-link" id="v-pills-business-tab" data-toggle="pill" href="#v-pills-business" role="tab" aria-controls="v-pills-business" aria-selected="false">BUSINESS</a>
+                              <a class="nav-link" id="v-pills-branding-tab" data-toggle="pill" href="#v-pills-branding" role="tab" aria-controls="v-pills-branding" aria-selected="false">BRANDING</a>
+                              <a class="nav-link" id="v-pills-startup-tab" data-toggle="pill" href="#v-pills-startup" role="tab" aria-controls="v-pills-startup" aria-selected="false">START UP</a>
+                              <a class="nav-link" id="v-pills-tips-tab" data-toggle="pill" href="#v-pills-tips" role="tab" aria-controls="v-pills-tips" aria-selected="false">TIPS</a>
+                            </div>
+                          </div>
+                          <div class="col-10">
+                            <div class="tab-content" id="v-pills-tabContent">
+                              <div class="tab-pane fade show active" id="v-pills-news" role="tabpanel" aria-labelledby="v-pills-news-tab">
+
+                                    <div class="group-swiper-in-nav">
+                                        <div class="swiper-button-prev swiper-news-prev"><</div>
+                                        <div class="swiper-button-next swiper-news-next">></div>
+                                    </div>
+
+                                    <!-- Slider main container -->
+                                    <div class="swiper-news swiper-container">
+                                        <!-- Additional required wrapper -->
+                                        <div class="swiper-wrapper">
+                                            <!-- Slides -->
+                                            <div class="swiper-slide swiper-no-swiping">
+                                              <section class="_card _card-column _card-news">
+                                                  <p class="day">Sep 27, 2018</p>
+                                                  <div class="thumb view zoom">
+                                                      <a href="#" class="parent">
+                                                        <span class="img-photo" style="background-image: url('img/thumb/img-editor-01@2x.jpg')">
+                                                        </span>
+                                                      </a>
+                                                  </div>
+                                                  <div class="info" data-mh="info-news">
+                                                    <h2 class="title non-margin insert-dotdotdot">
+                                                      <a href="#">หนังสือน่าอ่าน “มองการทำตลาดแบบวัวสีม่วง” ที่นักการตลาดไม่ควรพลาด หนังสือน่าอ่าน “มองการทำตลาดแบบวัวสีม่วง” ที่นักการตลาดไม่ควรพลาด</a>
+                                                    </h2>
+                                                  </div>
+                                              </section>
+                                            </div>
+
+                                            <div class="swiper-slide swiper-no-swiping">
+                                              <section class="_card _card-column _card-news">
+                                                  <p class="day">Sep 27, 2018</p>
+                                                  <div class="thumb view zoom">
+                                                      <a href="#" class="parent">
+                                                        <span class="img-photo" style="background-image: url('img/thumb/img-editor-02@2x.jpg')">
+                                                        </span>
+                                                      </a>
+                                                  </div>
+                                                  <div class="info" data-mh="info-news">
+                                                    <h2 class="title non-margin insert-dotdotdot">
+                                                      <a href="#">KBTG เดินหน้าปั้น TechJam2018 หวังสร้างความตื่นตัวและสีสันให้วงการเทคโนโลยี</a>
+                                                    </h2>
+                                                  </div>
+                                              </section>
+                                            </div>
+
+                                            <div class="swiper-slide swiper-no-swiping">
+                                              <section class="_card _card-column _card-news">
+                                                  <p class="day">Sep 27, 2018</p>
+                                                  <div class="thumb view zoom">
+                                                      <a href="#" class="parent">
+                                                        <span class="img-photo" style="background-image: url('img/thumb/img-editor-03@2x.jpg')">
+                                                        </span>
+                                                      </a>
+                                                  </div>
+                                                  <div class="info" data-mh="info-news">
+                                                    <h2 class="title non-margin insert-dotdotdot">
+                                                      <a href="#">ETDA Big Change to Big Chance ปรับตัวสู่โลกอนาคต..โลกแห่งยุคดิจิทัล</a>
+                                                    </h2>
+                                                  </div>
+                                              </section>
+                                            </div>
+
+                                            <div class="swiper-slide swiper-no-swiping">
+                                              <section class="_card _card-column _card-news">
+                                                  <p class="day">Sep 27, 2018</p>
+                                                  <div class="thumb view zoom">
+                                                      <a href="#" class="parent">
+                                                        <span class="img-photo" style="background-image: url('img/thumb/img-editor-04@2x.jpg')">
+                                                        </span>
+                                                      </a>
+                                                  </div>
+                                                  <div class="info" data-mh="info-news">
+                                                    <h2 class="title non-margin insert-dotdotdot">
+                                                      <a href="#">5 เทคนิคถ่ายรูปสวยแบบ Influencer จาก Samsung Photo Hub</a>
+                                                    </h2>
+                                                  </div>
+                                              </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.Slider main container -->
+                              </div>
+                              <div class="tab-pane fade" id="v-pills-digital" role="tabpanel" aria-labelledby="v-pills-digital-tab">DIGITAL</div>
+                              <div class="tab-pane fade" id="v-pills-tech" role="tabpanel" aria-labelledby="v-pills-tech-tab">TECH</div>
+                              <div class="tab-pane fade" id="v-pills-business" role="tabpanel" aria-labelledby="v-pills-business-tab">BUSINESS</div>
+                              <div class="tab-pane fade" id="v-pills-branding" role="tabpanel" aria-labelledby="v-pills-branding-tab">BRANDING</div>
+                              <div class="tab-pane fade" id="v-pills-startup" role="tabpanel" aria-labelledby="v-pills-startup-tab">START UP</div>
+                              <div class="tab-pane fade" id="v-pills-tips" role="tabpanel" aria-labelledby="v-pills-tips-tab">START UP</div>
+                            </div>
+                          </div>
+                      </div>
                     </div>
                   </li>
                   <li class="nav-item">
@@ -99,12 +207,13 @@
                     </ul>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="javascript:void(0);"><i class="icon icon-search"></i></a>
-                    </li>
+                      <a class="nav-link" style="padding-right:0;" href="javascript:void(0);"><i class="icon icon-search" style="vertical-align: middle;"></i></a>
+                  </li>
                 </ul>
               </div>
             </div>
         </nav>
+
       </div>
     </section>
 
@@ -131,7 +240,6 @@
     <!-- /menu mobile -->
 </header>
 
-
 <main id="main" class="page_home" style="padding-top: 0;">
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -145,7 +253,7 @@
             <div class="carousel-inner" role="listbox">
               <!-- Slide One - Set the background image for this slide in the line below -->
               <div class="carousel-item active" style="background-image: url('img/banner1.png')">
-                <div class="carousel-caption">
+                <div class="carousel-caption d-none d-md-block">
                   <h3>เปลี่ยนคุณให้เป็น
                     <br> Digital PR</h3>
                   <p>กับ PublicRelationSHIFTความรู้ใหม่
@@ -155,7 +263,7 @@
               </div>
               <!-- Slide Two - Set the background image for this slide in the line below -->
               <div class="carousel-item" style="background-image: url('img/banner1.png')">
-                <div class="carousel-caption">
+                <div class="carousel-caption d-none d-md-block">
                   <h3>เปลี่ยนคุณให้เป็น
                     <br> Digital PR</h3>
                   <p>กับ PublicRelationSHIFTความรู้ใหม่
@@ -165,7 +273,7 @@
               </div>
               <!-- Slide Three - Set the background image for this slide in the line below -->
               <div class="carousel-item" style="background-image: url('img/banner1.png')">
-                <div class="carousel-caption">
+                <div class="carousel-caption d-none d-md-block">
                   <h3>เปลี่ยนคุณให้เป็น
                     <br> Digital PR</h3>
                   <p>กับ PublicRelationSHIFTความรู้ใหม่
@@ -962,10 +1070,8 @@
   <!-- /.container -->
 </footer>
 <!-- /FOOTER -->
-
 <!-- library
   ================================================== -->
-
 <script src="vendor/jquery/modernizr.min.js"></script>
 <script src="vendor/jquery/detectizr.min.js"></script>
 
@@ -976,8 +1082,6 @@
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script type="text/javascript">
-</script>
 
 <script>
   function showNavbar(params) {
@@ -1050,6 +1154,7 @@
 <!-- sticky header-->
 <script src="vendor/jquery/jquery.easing.min.js"></script>
 <script src="vendor/jquery/jquery.stickyNavbar.min.js"></script>
+<script src="vendor/jquery/megamenu.js"></script>
 
 <!-- menu mobile -->
 <script src="vendor/jquery/page-home.js"></script>

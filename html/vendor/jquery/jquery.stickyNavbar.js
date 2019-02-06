@@ -28,7 +28,7 @@
 
     // Set default values
     var options = $.extend({
-        activeClass: 'active', // Class to be added to highlight nav elements
+        activeClass: 'activeSticky', // Class to be added to highlight nav elements
         sectionSelector: 'scrollto', // Class of the section that is interconnected with nav links
         animDuration: 350, // Duration of jQuery animation as well as jQuery scrolling duration
         startAt: 0, // Stick the menu at XXXpx from the top of the this() (nav container)
