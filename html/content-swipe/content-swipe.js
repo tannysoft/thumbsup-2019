@@ -24,7 +24,7 @@ var fetchAndBuildItem = function(currentId, callback) {
     url: 'http://thumbsup.tan.cloud/index.php?rest_route=/wp/v2/posts/' + currentId,
   })
     .done(function(resp) {
-      console.log(resp);
+      // console.log(resp);
       // console.log('CurrentID:', currentId, resp);
       _resp = resp
 
@@ -150,10 +150,10 @@ function createNav() {
 function adjustPreviousItem(data) {
   if (!data) { return }
 
-  $.get(location.href, function(htmlString) {
+  $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
     var div = document.createElement('div');
     div.innerHTML = htmlString.trim();
-    var prevContent = $(div).find('#main').parent().html();
+    var prevContent = $(div).find('#wrapper-swipe-content').parent().html();
 
     var $prevItem = $container.find('.content-carousel-item.prev');
 
@@ -184,15 +184,15 @@ function adjustPreviousItem(data) {
 function adjustNextItem(data) {
   if (!data) { return }
 
-  $.get(location.href, function(htmlString) {
+  $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
     var div = document.createElement('div');
     div.innerHTML = htmlString.trim();
-    var nextContent = $(div).find('#main').parent().html();
+    var nextContent = $(div).find('#wrapper-swipe-content').parent().html();
 
     var $nextItem = $container.find('.content-carousel-item.next');
 
     // NOTE: For debug
-    console.log($nextItem);
+    // console.log($nextItem);
     $nextItem.find('.content-editor:first').prepend(data.content);
 
     if ($nextItem.length === 0) {
