@@ -12,9 +12,15 @@ var defaultSettings = {
   totalPages: 30,
   navContainer: null,
   container: null,
+  devMode: false,
 };
 
 var __contentSwipe = function(newSettings) {
+  if (document.getElementById('content-carousel-wrapper')) {
+    console.log('Content swipe already attach');
+    return;
+  }
+
   if (!isMobile) {
     console.log('Don\'t do anything if isn\'t mobile.');
     return;
@@ -214,8 +220,10 @@ __contentSwipe.prototype = {
     if (!data) { return }
 
     var self = this;
+    // var requestURL = this.devMode ? 'http://localhost:3100/get-content-from-url?url=' + data.link : data.link;
+    var requestURL = this.settings.devMode ? location.href : data.link;
 
-    $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
+    $.get(requestURL, function(htmlString) {
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
       var prevContent = $(div).find(self.settings.target).parent().html();
@@ -250,8 +258,10 @@ __contentSwipe.prototype = {
     if (!data) { return }
 
     var self = this;
+    // var requestURL = this.devMode ? 'http://localhost:3100/get-content-from-url?url=' + data.link : data.link;
+    var requestURL = this.settings.devMode ? location.href : data.link;
 
-    $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
+    $.get(requestURL, function(htmlString) {
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
       var nextContent = $(div).find(self.settings.target).parent().html();
