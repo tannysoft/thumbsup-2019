@@ -35,6 +35,7 @@ var __contentSwipe = function(newSettings) {
   this.busy = false;
   this.navItemsPerPage = settings.navItemsPerPage;
   this.$target = $(settings.target);
+  this.settings = settings;
 
   var $wrapElement = $(
     '<div id="content-carousel-wrapper" class="content-carousel-wrapper">' +
@@ -94,25 +95,23 @@ __contentSwipe.prototype = {
 
   bindSwipeEvent: function() {
     var self = this;
+    var swipeAction = function(direction) {
+          anime({
+            targets: self.$container[0],
+            translateX: direction === 'left' ? '-100%' : '100%',
+            easing: 'linear',
+            duration: 250,
+            complete: function() {
+              self.afterSlideEnd(direction);
+              self.busy = true;
+            },
+          });
+        };
 
     this.$container
       .swipe({
         swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
           if (self.busy) return;
-
-          var swipeAction = function(direction) {
-            anime({
-              targets: self.$container[0],
-              translateX: direction === 'left' ? '-100%' : '100%',
-              easing: 'linear',
-              duration: 250,
-              complete: function() {
-                self.afterSlideEnd(direction);
-                self.busy = true;
-              },
-            });
-          };
-
 
           if (direction === 'left' && $('.content-carousel-item.next').length > 0) {
             swipeAction(direction);
@@ -219,7 +218,7 @@ __contentSwipe.prototype = {
     $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
-      var prevContent = $(div).find('#wrapper-swipe-content').parent().html();
+      var prevContent = $(div).find(self.settings.target).parent().html();
 
       var $prevItem = self.$container.find('.content-carousel-item.prev');
 
@@ -255,7 +254,7 @@ __contentSwipe.prototype = {
     $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
-      var nextContent = $(div).find('#wrapper-swipe-content').parent().html();
+      var nextContent = $(div).find(self.settings.target).parent().html();
 
       var $nextItem = self.$container.find('.content-carousel-item.next');
 
