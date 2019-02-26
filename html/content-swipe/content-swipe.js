@@ -4,235 +4,288 @@
 // http://labs.rampinteractive.co.uk/touchSwipe/demos/index.html
 // http://thumbsup.tan.cloud/wp-json/wp/v2/posts/81
 
-var totalPages = 30;
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-var __data = {
-  id: 56,
-  content: null,
-  previous: null,
-  next: null,
+var defaultSettings = {
+  target: null,
+  navItemsPerPage: 10,
+  totalPages: 30,
+  navContainer: null,
+  container: null,
 };
-var currentContentIndex = 0;
-var navItemsPerPage = 10;
-var busy = false;
-var $nav = $('#content-carousel-nav');
-var $container = $('#content-carousel-container');
 
-var fetchAndBuildItem = function(currentId, callback) {
-  var _resp = null
-
-  $.ajax({
-    // url: 'http://thumbsup.tan.cloud/wp-json/wp/v2/posts/' + currentId,
-    url: 'http://thumbsup.tan.cloud/index.php?rest_route=/wp/v2/posts/' + currentId,
-  })
-    .done(function(resp) {
-      // console.log(resp);
-      // console.log('CurrentID:', currentId, resp);
-      _resp = resp
-
-      __data = {
-        id: resp.id,
-        content: resp.content.rendered,
-        previous: resp.previous,
-        next: resp.next,
-      };
-
-      createNav();
-      adjustPreviousItem(__data.previous);
-      adjustNextItem(__data.next);
-    })
-    .fail(function() {
-      console.log('Error!, Please try again later');
-    })
-    .always(function() {
-      (callback || $.noop)(_resp);
-    })
-}
-
-// first fetch for prepare data
-fetchAndBuildItem(__data.id);
-
-$container
-  .swipe({
-    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-      if (busy) return;
-
-      var swipeAction = function(direction) {
-        anime({
-          targets: $container[0],
-          translateX: direction === 'left' ? '-100%' : '100%',
-          easing: 'linear',
-          duration: 250,
-          complete: function() {
-            afterSlideEnd(direction);
-            busy = true;
-          },
-        });
-      };
-
-
-      if (direction === 'left' && $('.content-carousel-item.next').length > 0) {
-        swipeAction(direction);
-      }
-      else if (direction === 'right' && $('.content-carousel-item.prev').length > 0) {
-        swipeAction(direction);
-      }
-    }
-  });
-
-function afterSlideEnd(direction) {
-  var currentId = null;
-  var $prev = $container.find('.content-carousel-item.prev');
-  var $current = $container.find('.content-carousel-item.current');
-  var $next = $container.find('.content-carousel-item.next');
-
-  if (direction === 'left') {
-    $current.removeClass('current').addClass('prev');
-    $next.removeClass('next').addClass('current');
-
-    currentId = __data.next.id;
-
-    // mock content index
-    if (currentContentIndex === navItemsPerPage - 1) {
-      currentContentIndex = 0;
-    }
-    else {
-      currentContentIndex = currentContentIndex + 1;
-    }
-  }
-  else if (direction === 'right') {
-    $current.removeClass('current').addClass('next');
-    $prev.removeClass('prev').addClass('current');
-
-    currentId = __data.previous.id;
-
-    // mock content index
-    if (currentContentIndex === 0) {
-      currentContentIndex = navItemsPerPage - 1;
-    }
-    else {
-      currentContentIndex = currentContentIndex - 1;
-    }
+var __contentSwipe = function(newSettings) {
+  if (!isMobile) {
+    console.log('Don\'t do anything if isn\'t mobile.');
+    return;
   }
 
-  $container.addClass('end');
-  resetContainerPosition();
+  console.log('Enable content swipe !');
 
-  var mod = currentContentIndex % navItemsPerPage;
-  if (mod === 0 || mod === navItemsPerPage - 1) {
-    createNav();
-  }
+  var self = this;
+  var settings = $.extend({}, defaultSettings, newSettings);
 
-  setActiveToNavItem(currentContentIndex);
+  this.data = {
+    id: settings.initContentId,
+    content: null,
+    previous: null,
+    next: null,
+  };
+  this.currentContentIndex = 0;
+  this.busy = false;
+  this.navItemsPerPage = settings.navItemsPerPage;
+  this.$target = $(settings.target);
 
-  fetchAndBuildItem(currentId, function() {
-    $container.removeClass('end');
-    busy = false;
+  var $wrapElement = $(
+    '<div id="content-carousel-wrapper" class="content-carousel-wrapper">' +
+      '<div id="content-carousel-nav" class="content-carousel-nav"></div>' +
+      '<div id="content-carousel-container" class="content-carousel-container">' +
+        '<div class="content-carousel-item current">' +
+          '<div class="content-carousel-item-content"></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>'
+  );
+
+  $wrapElement.insertAfter(this.$target);
+  $wrapElement.find('.content-carousel-item-content').wrapInner(this.$target);
+
+  setTimeout(function() {
+    self.$navContainer = $wrapElement.find('#content-carousel-nav');
+    self.$container = $wrapElement.find('#content-carousel-container');
+
+    self.fetchAndBuildItem(settings.initContentId);
+    self.bindSwipeEvent();
   });
 }
 
-function resetContainerPosition() {
-  $container[0].style.transform = 'translateX(0) translateY(0) translateZ(0)';
-}
+__contentSwipe.prototype = {
+  fetchAndBuildItem: function(currentId, callback) {
+    var self = this;
+    var _resp = null;
 
-function createNav() {
-  // NOTE: Disabled create nav, because we don't have data to calculate pages.
-  var start = 0;
-  var mod = currentContentIndex % navItemsPerPage;
-  start = currentContentIndex - mod;
+    $.ajax({
+      // url: 'http://thumbsup.tan.cloud/wp-json/wp/v2/posts/' + currentId,
+      url: 'http://thumbsup.tan.cloud/index.php?rest_route=/wp/v2/posts/' + currentId,
+    })
+      .done(function(resp) {
+        // console.log(resp);
+        // console.log('CurrentID:', currentId, resp);
+        _resp = resp
 
-  var end = start + navItemsPerPage;
-  end = end > totalPages ? totalPages : end
-  var nav = [];
+        self.data = {
+          id: resp.id,
+          content: resp.content.rendered,
+          previous: resp.previous,
+          next: resp.next,
+        };
 
-  for (var index = start; index < end; index++) {
-    var className = index === currentContentIndex ? 'item active' : 'item';
+        self.createNav();
+        self.adjustPreviousItem(self.data.previous);
+        self.adjustNextItem(self.data.next);
+      })
+      .fail(function() {
+        console.log('Error!, Please try again later');
+      })
+      .always(function() {
+        (callback || $.noop)(_resp);
+      })
+  },
 
-    nav.push(
-      '<li data-index="' + index + '" class="' + className + '">' +
-        '<span class="dot"></span>' +
-      '</li>'
-    );
-  }
+  bindSwipeEvent: function() {
+    var self = this;
 
-  $nav.html('<ul class="list">' + nav.join('') + '</ul>');
-}
+    this.$container
+      .swipe({
+        swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+          if (self.busy) return;
 
-function setActiveToNavItem(index) {
-  $nav
-    .find('[data-index="' + index + '"]')
-    .addClass('active')
-    .siblings()
-    .removeClass('active');
-}
+          var swipeAction = function(direction) {
+            anime({
+              targets: self.$container[0],
+              translateX: direction === 'left' ? '-100%' : '100%',
+              easing: 'linear',
+              duration: 250,
+              complete: function() {
+                self.afterSlideEnd(direction);
+                self.busy = true;
+              },
+            });
+          };
 
-function adjustPreviousItem(data) {
-  if (!data) { return }
 
-  $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
-    var div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
-    var prevContent = $(div).find('#wrapper-swipe-content').parent().html();
+          if (direction === 'left' && $('.content-carousel-item.next').length > 0) {
+            swipeAction(direction);
+          }
+          else if (direction === 'right' && $('.content-carousel-item.prev').length > 0) {
+            swipeAction(direction);
+          }
+        }
+      });
+  },
 
-    var $prevItem = $container.find('.content-carousel-item.prev');
+  afterSlideEnd: function(direction) {
+    var self = this;
+    var currentId = null;
+    var $prev = this.$container.find('.content-carousel-item.prev');
+    var $current = this.$container.find('.content-carousel-item.current');
+    var $next = this.$container.find('.content-carousel-item.next');
 
-    // NOTE: For debug
-    $prevItem.find('.content-editor:first').prepend(data.content);
+    if (direction === 'left') {
+      $current.removeClass('current').addClass('prev');
+      $next.removeClass('next').addClass('current');
 
-    if ($prevItem.length === 0) {
-      $container.prepend(
-        '<div class="content-carousel-item prev">' +
-          '<div class="content-carousel-item-content">' +
-            prevContent +
-          '</div>' +
-        '</div>'
-      )
-    }
-    else {
-      $prevItem.children().html(prevContent);
-    }
+      currentId = this.data.next.id;
 
-    setTimeout(function() {
-      if ($prevItem.length > 1) {
-        $prevItem.first().remove();
+      // mock content index
+      if (this.currentContentIndex === this.navItemsPerPage - 1) {
+        this.currentContentIndex = 0;
       }
+      else {
+        this.currentContentIndex = this.currentContentIndex + 1;
+      }
+    }
+    else if (direction === 'right') {
+      $current.removeClass('current').addClass('next');
+      $prev.removeClass('prev').addClass('current');
+
+      currentId = this.data.previous.id;
+
+      // mock content index
+      if (this.currentContentIndex === 0) {
+        this.currentContentIndex = this.navItemsPerPage - 1;
+      }
+      else {
+        this.currentContentIndex = this.currentContentIndex - 1;
+      }
+    }
+
+    this.$container.addClass('end');
+    this.resetContainerPosition();
+
+    var mod = this.currentContentIndex % this.navItemsPerPage;
+    if (mod === 0 || mod === this.navItemsPerPage - 1) {
+      this.createNav();
+    }
+
+    this.setActiveToNavItem(this.currentContentIndex);
+
+    this.fetchAndBuildItem(currentId, function() {
+      self.$container.removeClass('end');
+      self.busy = false;
     });
-  })
-}
+  },
 
-function adjustNextItem(data) {
-  if (!data) { return }
+  resetContainerPosition: function() {
+    this.$container[0].style.transform = 'translateX(0) translateY(0) translateZ(0)';
+  },
 
-  $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
-    var div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
-    var nextContent = $(div).find('#wrapper-swipe-content').parent().html();
+  createNav: function() {
+    // NOTE: Disabled create nav, because we don't have data to calculate pages.
+    var start = 0;
+    var mod = this.currentContentIndex % this.navItemsPerPage;
+    start = this.currentContentIndex - mod;
 
-    var $nextItem = $container.find('.content-carousel-item.next');
+    var end = start + this.navItemsPerPage;
+    end = end > this.totalPages ? this.totalPages : end
+    var nav = [];
 
-    // NOTE: For debug
-    // console.log($nextItem);
-    $nextItem.find('.content-editor:first').prepend(data.content);
+    for (var index = start; index < end; index++) {
+      var className = index === this.currentContentIndex ? 'item active' : 'item';
 
-    if ($nextItem.length === 0) {
-      $container.append(
-        '<div class="content-carousel-item next">' +
-          '<div class="content-carousel-item-content">' +
-            nextContent +
-          '</div>' +
-        '</div>'
-      )
-    }
-    else {
-      $nextItem.children().html(nextContent);
+      nav.push(
+        '<li data-index="' + index + '" class="' + className + '">' +
+          '<span class="dot"></span>' +
+        '</li>'
+      );
     }
 
-    setTimeout(function() {
-      if ($nextItem.length > 1) {
-        $nextItem.last().remove();
+    this.$navContainer.html('<ul class="list">' + nav.join('') + '</ul>');
+  },
+
+  setActiveToNavItem: function(index) {
+    this.$navContainer
+      .find('[data-index="' + index + '"]')
+      .addClass('active')
+      .siblings()
+      .removeClass('active');
+  },
+
+  adjustPreviousItem: function(data) {
+    if (!data) { return }
+
+    var self = this;
+
+    $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
+      var div = document.createElement('div');
+      div.innerHTML = htmlString.trim();
+      var prevContent = $(div).find('#wrapper-swipe-content').parent().html();
+
+      var $prevItem = self.$container.find('.content-carousel-item.prev');
+
+      // NOTE: For debug
+      $prevItem.find('.content-editor:first').prepend(data.content);
+
+      if ($prevItem.length === 0) {
+        self.$container.prepend(
+          '<div class="content-carousel-item prev">' +
+            '<div class="content-carousel-item-content">' +
+              prevContent +
+            '</div>' +
+          '</div>'
+        )
       }
+      else {
+        $prevItem.children().html(prevContent);
+      }
+
+      setTimeout(function() {
+        if ($prevItem.length > 1) {
+          $prevItem.first().remove();
+        }
+      });
+    })
+  },
+
+  adjustNextItem: function(data) {
+    if (!data) { return }
+
+    var self = this;
+
+    $.get('http://localhost:3100/get-content-from-url?url=' + data.link, function(htmlString) {
+      var div = document.createElement('div');
+      div.innerHTML = htmlString.trim();
+      var nextContent = $(div).find('#wrapper-swipe-content').parent().html();
+
+      var $nextItem = self.$container.find('.content-carousel-item.next');
+
+      // NOTE: For debug
+      // console.log($nextItem);
+      $nextItem.find('.content-editor:first').prepend(data.content);
+
+      if ($nextItem.length === 0) {
+        self.$container.append(
+          '<div class="content-carousel-item next">' +
+            '<div class="content-carousel-item-content">' +
+              nextContent +
+            '</div>' +
+          '</div>'
+        )
+      }
+      else {
+        $nextItem.children().html(nextContent);
+      }
+
+      setTimeout(function() {
+        if ($nextItem.length > 1) {
+          $nextItem.last().remove();
+        }
+      });
     });
-  });
+  }
 }
+
+
+window.__contentSwipe = __contentSwipe;
 
 })(jQuery);
