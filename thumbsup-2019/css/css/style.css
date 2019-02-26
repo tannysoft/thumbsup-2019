@@ -1,14 +1,14 @@
 
 @font-face{
     font-family: 'Helvethaica';
-    src: url(font/DB Helvethaica X UlLi Ext v3.2.ttf);
-    src: url(font/DB Helvethaica X UlLi Ext v3.2.otf);
+    src: url('../font/DB Helvethaica X UlLi Ext v3.2.ttf');
+    src: url('../font/DB Helvethaica X UlLi Ext v3.2.otf');
 }
 
 @font-face{
     font-family: 'FC Active Light';
-    src: url(font/FC Active Light.ttf);
-    src: url(font/FC Active Light.otf);
+    src: url('../font/FC Active Light.ttf');
+    src: url('../font/FC Active Light.otf');
 }
 body{
     font-family: 'Helvethaica';
