@@ -4,8 +4,10 @@
 // http://labs.rampinteractive.co.uk/touchSwipe/demos/index.html
 // http://thumbsup.tan.cloud/wp-json/wp/v2/posts/81
 
+var totalPages = 30;
+
 var __data = {
-  id: 81,
+  id: 56,
   content: null,
   previous: null,
   next: null,
@@ -35,7 +37,7 @@ var fetchAndBuildItem = function(currentId, callback) {
         next: resp.next,
       };
 
-      // createNav();
+      createNav();
       adjustPreviousItem(__data.previous);
       adjustNextItem(__data.next);
     })
@@ -89,22 +91,39 @@ function afterSlideEnd(direction) {
     $next.removeClass('next').addClass('current');
 
     currentId = __data.next.id;
+
+    // mock content index
+    if (currentContentIndex === navItemsPerPage - 1) {
+      currentContentIndex = 0;
+    }
+    else {
+      currentContentIndex = currentContentIndex + 1;
+    }
   }
   else if (direction === 'right') {
     $current.removeClass('current').addClass('next');
     $prev.removeClass('prev').addClass('current');
 
     currentId = __data.previous.id;
+
+    // mock content index
+    if (currentContentIndex === 0) {
+      currentContentIndex = navItemsPerPage - 1;
+    }
+    else {
+      currentContentIndex = currentContentIndex - 1;
+    }
   }
 
   $container.addClass('end');
   resetContainerPosition();
 
-  // var mod = currentContentIndex % navItemsPerPage;
-  // if (mod === 0 || mod === navItemsPerPage - 1) {
-  //   createNav();
-  // }
-  // setActiveToNavItem(currentContentIndex);
+  var mod = currentContentIndex % navItemsPerPage;
+  if (mod === 0 || mod === navItemsPerPage - 1) {
+    createNav();
+  }
+
+  setActiveToNavItem(currentContentIndex);
 
   fetchAndBuildItem(currentId, function() {
     $container.removeClass('end');
@@ -118,34 +137,34 @@ function resetContainerPosition() {
 
 function createNav() {
   // NOTE: Disabled create nav, because we don't have data to calculate pages.
-  // var start = 0;
-  // var mod = currentContentIndex % navItemsPerPage;
-  // start = currentContentIndex - mod;
-  //
-  // var end = start + navItemsPerPage;
-  // end = end > __data.length ? __data.length : end
-  // var nav = [];
-  //
-  // for (var index = start; index < end; index++) {
-  //   var className = index === currentContentIndex ? 'item active' : 'item';
-  //
-  //   nav.push(
-  //     '<li data-index="' + index + '" class="' + className + '">' +
-  //       '<span class="dot"></span>' +
-  //     '</li>'
-  //   );
-  // }
-  //
-  // $nav.html('<ul class="list">' + nav.join('') + '</ul>');
+  var start = 0;
+  var mod = currentContentIndex % navItemsPerPage;
+  start = currentContentIndex - mod;
+
+  var end = start + navItemsPerPage;
+  end = end > totalPages ? totalPages : end
+  var nav = [];
+
+  for (var index = start; index < end; index++) {
+    var className = index === currentContentIndex ? 'item active' : 'item';
+
+    nav.push(
+      '<li data-index="' + index + '" class="' + className + '">' +
+        '<span class="dot"></span>' +
+      '</li>'
+    );
+  }
+
+  $nav.html('<ul class="list">' + nav.join('') + '</ul>');
 }
 
-// function setActiveToNavItem(index) {
-//   $nav
-//     .find('[data-index="' + index + '"]')
-//     .addClass('active')
-//     .siblings()
-//     .removeClass('active');
-// }
+function setActiveToNavItem(index) {
+  $nav
+    .find('[data-index="' + index + '"]')
+    .addClass('active')
+    .siblings()
+    .removeClass('active');
+}
 
 function adjustPreviousItem(data) {
   if (!data) { return }
