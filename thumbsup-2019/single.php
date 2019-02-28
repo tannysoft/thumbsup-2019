@@ -10,21 +10,19 @@
 get_header();
 ?>
 <div id="wrapper-swipe-content" class="page_news _bg-marble">
-	<?php /*
-	<div class="main-header">
-		<div class="container">
-			<h2 class="main-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-		</div>
-	</div>*/ ?>
 	<!-- LEAD COVER -->
-	<section class="_lead-cover">
-		<div class="bg-cover" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/lead/lead-cover.jpg');">
-			<!-- <div class="intro">
-			<h1 class="title">เปลี่ยนคุณให้เป็น Digital PR</h1>
-			<p>กับ PublicRelationSHIFTความรู้ใหม่ที่ไม่ควรมองข้าม</p>
-			</div> -->
-		</div>
-	</section>
+    <section class="_lead-cover">
+      <div class="bg-cover" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>');">
+        <div class="intro">
+          <div class="display-table">
+            <div class="display-table-cell">
+                <h2 class="title"><?php the_field('title_line1'); ?> <?php the_field('title_line2'); ?></h2>
+                <p class="text"><?php the_field('title_line3'); ?></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 	<!-- CONTENT DETAIL -->
 	<section class="_section _bg-white">

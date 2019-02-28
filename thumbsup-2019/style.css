@@ -19,6 +19,39 @@ Tags: featured-images, custom-menu
 .admin-bar #header .header-sticky.sticky {
   margin-top: 32px; }
 
+.section-most-popular > .listing-card > ._card-popular > .thumb > a:before {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #0e0e0e;
+  left: 0;
+  top: 0;
+  font-family: "helvethaicaX";
+  font-weight: 400;
+  font-size: 60px;
+  font-size: 6rem;
+  color: #f7b787;
+  font-style: normal;
+  text-align: center; }
+
+.section-most-popular > .listing-card > ._card-popular:nth-child(1) > .thumb > a:before {
+  content: '1'; }
+
+.section-most-popular > .listing-card > ._card-popular:nth-child(2) > .thumb > a:before {
+  content: '2'; }
+
+.section-most-popular > .listing-card > ._card-popular:nth-child(3) > .thumb > a:before {
+  content: '3'; }
+
+.section-most-popular > .listing-card > ._card-popular:nth-child(4) > .thumb > a:before {
+  content: '4'; }
+
+.section-most-popular > .listing-card > ._card-popular:nth-child(5) > .thumb > a:before {
+  content: '5'; }
+
 .content-single {
   padding-top: 0; }
 
@@ -100,6 +133,7 @@ Tags: featured-images, custom-menu
   .content-editor img {
     margin: 4rem auto;
     max-width: 100%;
+    height: auto;
     display: block; }
   .content-editor p {
     margin-bottom: 1.8rem; }

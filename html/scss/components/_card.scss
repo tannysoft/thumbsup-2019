@@ -1,0 +1,448 @@
+.list-author-by{
+    font-family: $brandfont;
+    font-weight: 100;
+    @include font-size(24);
+    color: $white;
+
+    li + li{
+      border-left: 1px solid $white;
+      padding-left: 10px;
+    }
+
+    .name,
+    .day{
+        color: $brand-color;
+    }
+}
+
+
+.listing-card{
+  ._card{
+    & + ._card{
+      margin-top: 20px;
+    }
+  }
+}
+
+
+._card{
+	position: relative;
+
+	.thumb{
+		position: relative;
+		overflow: hidden;
+    box-sizing: border-box;
+    padding-bottom: 57%;  //default card artical
+    width: 100%;
+
+    @include max-screen(767px){
+      padding-bottom: 59%;
+    }
+
+    .sign-number{
+      position: absolute;
+      z-index: 10;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      background-color: #0e0e0e;
+      left: 0;
+      top: 0;
+      font-family: $brandfont;
+      font-weight: 400;
+      @include font-size(60);
+      color: #f7b787;
+      font-style: normal;
+      text-align: center;
+    }
+
+    .parent{
+        display: block;
+        width: 100%;
+    }
+
+    .img-photo{
+        display: block;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        position: relative;
+
+        width: 100%;
+        margin: 0 auto;
+
+    }
+  }
+
+	.cat{
+		color: $white;
+    font-family: $brandfont;
+    font-weight: 100;
+    @include font-size(24);
+
+    @include max-screen(767px){
+      @include font-size(18);
+
+      .day{
+        margin-left: 5px;
+      }
+    }
+	}
+
+	.title{
+    a{
+      color: $white;
+
+      &:hover{
+        color: $brand-color;
+      }
+    }
+
+    @include max-screen(991px){
+      @include font-size(26);
+    }
+
+    @include max-screen(767px){
+      &.insert-dotdotdot{
+        max-height: 82px;
+        overflow: visible;
+      }
+    }
+  }
+
+  footer{
+    margin-top: 10px;
+  }
+
+  &._border-bottom{
+    border-bottom: 1px solid #707070;
+
+    @include max-screen(767px){
+      padding-left: 10px;
+      padding-right: 10px;
+
+      .cat{
+        margin-top: -5px;
+      }
+    }
+  }
+
+
+  &._card-row{
+    .info{
+      @include min-screen(768px){
+        padding-top: 10px;
+      }
+    }
+
+    .title{
+      @include min-screen(992px){
+        @include font-size(30);
+      }
+    }
+  }
+
+  &._card-column{
+      .thumb{
+          @include min-screen(1200px){
+            max-width: 498px;
+          }
+
+          .section-highlight &{
+            max-width: 100%;
+          }
+      }
+
+      &._size-big{
+
+        &._bg-darkblack{
+          @include max-screen(767px){
+            @include bg-transparent();
+          }
+        }
+
+        &._landscape-mobile{
+         .thumb{
+          @include max-screen(767px){
+              padding-bottom: 56.5%;
+          }
+         }
+        }
+
+        .thumb{
+
+          @include max-screen(767px){
+            padding-bottom: 100%;
+
+            .title{
+              text-align: right;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              z-index: 10;
+              padding: 10px;
+              background-color: rgba(#000000, 0.25)
+            }
+
+            .group-table{
+              display: table;
+              height: 100%;
+              width: 100%;
+            }
+
+            .group-table-cell{
+              display: table-cell;
+              vertical-align: bottom;
+              height: 100%;
+            }
+
+            .header{
+              @include font-size(40);
+              font-weight: 400;
+            }
+
+            .intro{
+              @include font-size(30);
+              font-weight: 300;
+            }
+          }
+        }
+
+        .info{
+          padding-top: 20px;
+          padding-right: 20px;
+
+          @include min-screen(1200px){
+            padding-top: 40px;
+            padding-right: 40px;
+          }
+
+          @include max-screen(991px){
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+          }
+        }
+      }
+
+      .info{
+        .section-highlight &{
+          padding-left: 40px;
+
+          @include max-screen(991px){
+            padding-left: 10px;
+          }
+        }
+      }
+  }
+
+  &._card-popular{
+    .thumb{
+      margin-bottom: 5px;
+    }
+    .cat{
+      @include font-size(18);
+    }
+    .title{
+      @include font-size(24);
+      font-weight: 300;
+      margin-bottom: 0;
+    }
+  }
+
+  &._card-content{
+    background-color: #1e1e1e;
+    display: inline-block;
+    padding: 20px;
+    @include transition(all $transition);
+    width: 100%;
+
+    a{
+      &:hover{
+        color: $white;
+      }
+    }
+
+    &:hover{
+      background-color: $brand-color;
+
+      .img-photo{
+        &:before{
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          z-index: 3;
+          background-color: rgba(#d88f5b, 0.23);
+        }
+
+        &:after{
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+          @include linear-gradient(180deg,
+          #000000 0%,
+          #ffffff 100%);
+          opacity: 0.2;
+        }
+      }
+    }
+
+    @include max-screen(767px){
+      padding: 15px;
+    }
+
+    .thumb{
+      margin-bottom: 20px;
+
+      @include max-screen(767px){
+        margin-bottom: 15px;
+      }
+
+      .icon{
+        position: absolute;
+        z-index: 20;
+        left: 50%;
+        top: 50%;
+        margin-top: -39px;
+        margin-left: -55px;
+      }
+    }
+
+    .title{
+      @include font-size(30);
+
+      @include max-screen(991px){
+        @include font-size(26);
+      }
+    }
+  }
+
+  &._card-author{
+    text-align: center;
+
+    @include max-screen(767px){
+      .section-highlight &{
+        margin-bottom: 20px;
+      }
+    }
+
+    .thumb{
+      border-radius: 500px 500px;
+      width: 215px;
+      height: 215px;
+      display: inline-block;
+      margin-bottom: 10px;
+      padding-bottom: 0;
+
+      @include max-screen(991px){
+        width: 115px;
+        height: 115px;
+      }
+    }
+
+    .info{
+      font-family: $brandfont;
+    }
+
+    .name{
+      @include font-size(40);
+      font-weight: 300;
+
+      @include max-screen(767px){
+        @include font-size(36);
+      }
+    }
+
+    .about{
+      @include font-size(30);
+      font-weight: 200;
+      margin-top: 10px;
+
+      @include max-screen(767px){
+        @include font-size(26);
+      }
+    }
+  }
+
+  &._card-writer{
+    font-family: $brandfont;
+    color: #666666;
+
+    .thumb{
+      border-radius: 500px 500px;
+      width: 130px;
+      height: 130px;
+      display: inline-block;
+      vertical-align: middle;
+      padding-bottom: 0;
+      margin-right: 10px;
+
+      @include max-screen(991px){
+        width: 115px;
+        height: 115px;
+      }
+
+      @include max-screen(767px){
+        @include size(100);
+      }
+    }
+
+    .info{
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .name{
+      @include font-size(30);
+      font-weight: normal;
+
+      @include max-screen(767px){
+        @include font-size(26);
+      }
+    }
+
+    .day{
+      @include font-size(24);
+      font-weight: 100;
+
+
+      @include max-screen(767px){
+        @include font-size(20);
+      }
+    }
+  }
+}
+
+
+.list-social-author{
+  margin-top: 30px;
+
+  @include max-screen(767px){
+    margin-top: 20px;
+  }
+
+  a:hover .fab{
+    color: $brand-color;
+  }
+
+  .fab{
+    font-size: 36px;
+    color: $white;
+    @include transition(all $transition);
+
+    @include max-screen(991px){
+      font-size: 30px;
+    }
+
+    @include max-screen(767px){
+      font-size: 26px;
+    }
+  }
+
+  .list-inline-item{
+    padding: 0px 15px;
+  }
+}

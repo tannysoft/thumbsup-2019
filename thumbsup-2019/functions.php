@@ -40,6 +40,10 @@ if ( ! function_exists( 'seed_setup' ) ) {
 		) );
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 370, 277, TRUE );
+		add_image_size( 'list-medium', 498, 297, true );
+		add_image_size( 'list-large', 704, 400, true );
+		add_image_size( 'card-mostview', 250, 143, true );
+		add_image_size( 'card-videos', 353, 202, true );
 		register_nav_menus( array(
 			'primary' => esc_html__( 'Main Menu', 'plant' ),
 			'mobile' => esc_html__( 'Mobile Menu', 'plant' ),
@@ -157,6 +161,9 @@ function seed_scripts() {
 	wp_enqueue_style( 'ts-bootstrap', get_template_directory_uri() . '/css/bootstrap.css' );
 	wp_enqueue_style( 'ts-ts-style', get_template_directory_uri() . '/css/style.css' );
 	wp_enqueue_style( 'ts-main', get_template_directory_uri() . '/css/main.css' );
+	if(is_single()) {
+		wp_enqueue_style( 'ts-content-swipe', get_template_directory_uri() . '/vendor/content-swipe/content-swipe.css' );
+	}
 	wp_enqueue_style( 'ts-style', get_stylesheet_uri() );
 	/* CSS */
 	//wp_enqueue_style( 'ts-bootstrap4', get_template_directory_uri() . '/css/bootstrap4.min.css' );
@@ -176,6 +183,13 @@ function seed_scripts() {
 	
 	wp_enqueue_script( 'ts-jquery-page-home', get_template_directory_uri() . '/vendor/jquery/page-home.js', array(), '2019-1', true );
 	wp_enqueue_script( 'ts-jquery-main', get_template_directory_uri() . '/vendor/jquery/main.js', array(), '2019-1', true );
+
+	if(is_single()) {
+		wp_enqueue_script( 'ts-animejs', get_template_directory_uri() . '/vendor/content-swipe/anime.min.js', array(), '2019-1', true );
+		wp_enqueue_script( 'ts-jquery-touchSwipe', get_template_directory_uri() . '/vendor/content-swipe/jquery.touchSwipe.min.js', array(), '2019-1', true );
+		wp_enqueue_script( 'ts-content-swipe', get_template_directory_uri() . '/vendor/content-swipe/content-swipe.js', array(), '2019-1', true );
+		wp_enqueue_script( 'ts-content-swipe-do-action', get_template_directory_uri() . '/vendor/content-swipe/content-swipe-do-action.js', array(), '2019-1', true );
+	}
 	
 	wp_enqueue_script( 'ts-main', get_template_directory_uri() . '/js/main.js', array(), '2019-1', true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -433,3 +447,10 @@ add_filter( 'rest_prepare_post', function( $response, $post, $request ) {
   
 	return $response;
 }, 10, 3 );
+
+function thumbsup_posted_on() {
+	echo '<ul class="list-author-by list-unstyled list-inline">
+		<li class="list-inline-item">By <span class="name">jakrapong</span></li>
+		<li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
+	</ul>';
+}

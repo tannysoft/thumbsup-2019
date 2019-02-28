@@ -65,7 +65,6 @@ $(document).ready(function() {
     }
   });
 
-
   function reinitSwiper() {
       setTimeout(function () {
           swiperEditor.update(true);

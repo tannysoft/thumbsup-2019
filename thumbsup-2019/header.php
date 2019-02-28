@@ -28,7 +28,7 @@
 			<?php if(is_active_sidebar('top-right')) { ?><div class="mobile-widget"><?php dynamic_sidebar( 'top-right' ); ?></div><?php } ?>
 		</nav>*/ ?>
 
-		<header id="header">
+		<header id="header" class="site-header sb-slide _heading">
 			<section class="secondary text-right d-none d-xl-block">
 				<div class="container">
 					<ul class="list-inline">
@@ -62,9 +62,9 @@
 			<div class="container">
 				<nav id="navbar" class="navbar navbar-expand-xl navbar-light">
 					<div class="d-block d-xl-none">
-						<a class="navbar-brand" href="javascript:void(0);">
-						<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
-						<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home">
+							<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+							<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
 						</a>
 					</div>
 
@@ -72,10 +72,10 @@
 					<div class="wsmenu group-nav navbar-right">
 						<ul class="wsmenu-list navbar-nav mr-auto text-uppercase text-nowrap">
 						<li class="logo-brand">
-							<a class="navbar-brand" href="javascript:void(0);">
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home">
 								<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
 								<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
-								</a>
+							</a>
 						</li>
 						<li class="nav-item active">
 							<a class="nav-link" href="javascript:void(0);">Home</a>

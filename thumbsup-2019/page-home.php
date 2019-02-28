@@ -85,42 +85,56 @@ get_header();
         <div class="row">
           <div class="col-xl-9">
 
-            <article class="listing-card" data-mh="group-height-popular">
+            <div class="listing-card" data-mh="group-height-popular">
+              <?php 
+                $args = array(
+                  // 'post__not_in' => $do_not_duplicate,
+                  // 'post_type' => 'post',
+                  // 'category_name' => 'suggested',
+                  'posts_per_page' => 4
+                  );
+                $the_query = new WP_Query( $args );
+                  
+                while ( $the_query->have_posts() ) : $the_query->the_post();
+                  //$do_not_duplicate[] = get_the_ID();
+                  get_template_part( 'template-parts/content', 'front-list' );
+                endwhile; wp_reset_postdata();
+              ?>
+              <?php /*
               <section class="_card _card-column _size-big _landscape-mobile _bg-darkblack">
-                  <div class="row">
-                      <div class="col-md-6 col-lg-7">
-                        <div class="thumb view zoom">
-                            <a href="#" class="parent">
-                                <span class="title h3 d-block d-md-none">
-                                  <span class="group-table">
-                                    <span class="group-table-cell">
-                                        <span class="header color-white">Samsung ใช้พลัง Twitter</span><br class="d-block d-md-none">
-                                        <span class="intro color-brand ">จุดกระแสให้ Note9</span>
-                                    </span>
-                                  </span>
-                                </span>
-                                <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/conference-01@2x.jpg')">
-                                </span>
-                            </a>
-                        </div>
-                      </div>
-                      <div class="col-md-6 col-lg-5">
-                        <div class="info d-none d-md-block">
-                          <header>
-                            <p class="cat text-uppercase">CONFERENCE</p>
-                            <h2 class="title h5">
-                              <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
-                            </h2>
-                          </header>
-                          <footer>
-                            <ul class="list-author-by list-unstyled list-inline">
-                              <li class="list-inline-item">By <span class="name">jakrapong</span></li>
-                              <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
-                            </ul>
-                          </footer>
-                        </div>
-                      </div>
+                <div class="row">
+                  <div class="col-md-6 col-lg-7">
+                    <div class="thumb view zoom">
+                        <a href="#" class="parent">
+                          <span class="title h3 d-block d-md-none">
+                            <span class="group-table">
+                              <span class="group-table-cell">
+                                  <span class="header color-white">Samsung ใช้พลัง Twitter</span><br class="d-block d-md-none">
+                                  <span class="intro color-brand ">จุดกระแสให้ Note9</span>
+                              </span>
+                            </span>
+                          </span>
+                          <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/conference-01@2x.jpg')"></span>
+                        </a>
+                    </div>
                   </div>
+                  <div class="col-md-6 col-lg-5">
+                    <div class="info d-none d-md-block">
+                      <header>
+                        <p class="cat text-uppercase">CONFERENCE</p>
+                        <h2 class="title h5">
+                          <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
+                        </h2>
+                      </header>
+                      <footer>
+                        <ul class="list-author-by list-unstyled list-inline">
+                          <li class="list-inline-item">By <span class="name">jakrapong</span></li>
+                          <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
+                        </ul>
+                      </footer>
+                    </div>
+                  </div>
+                </div>
               </section>
 
               <section class="_card _card-column _size-big _landscape-mobile _bg-darkblack">
@@ -233,8 +247,8 @@ get_header();
                       </div>
                   </div>
               </section>
-            </article>
-
+              */ ?>
+            </div>
           </div>
           <div class="col-xl-3">
             <section class="section-most-popular _bg-darkblack d-none d-xl-block" data-mh="group-height-popular">
@@ -243,20 +257,36 @@ get_header();
               </header>
 
               <section class="listing-card">
+
+                <?php 
+                  $args = array(
+                    // 'post__not_in' => $do_not_duplicate,
+                    // 'post_type' => 'post',
+                    // 'category_name' => 'suggested',
+                    'posts_per_page' => 5
+                    );
+                  $the_query = new WP_Query( $args );
+                    
+                  while ( $the_query->have_posts() ) : $the_query->the_post();
+                    //$do_not_duplicate[] = get_the_ID();
+                    get_template_part( 'template-parts/content', 'card-mostview' );
+                  endwhile; wp_reset_postdata();
+                ?>
+<?php /*
                 <section class="_card _card-column _card-popular">
-                    <div class="thumb view zoom">
-                        <a href="#" class="parent">
-                            <i class="sign-number">1</i>
-                            <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-popular-01@2x.jpg')">
-                            </span>
-                        </a>
-                    </div>
-                    <div class="info">
-                      <p class="cat">PR News</p>
-                      <h2 class="title">
-                        <a href="#">Infographic: call to action แบบไหนใช้อย่างไร</a>
-                      </h2>
-                    </div>
+                  <div class="thumb view zoom">
+                    <a href="#" class="parent">
+                      <i class="sign-number">1</i>
+                      <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-popular-01@2x.jpg')">
+                      </span>
+                    </a>
+                  </div>
+                  <div class="info">
+                    <p class="cat">PR News</p>
+                    <h2 class="title">
+                      <a href="#">Infographic: call to action แบบไหนใช้อย่างไร</a>
+                    </h2>
+                  </div>
                 </section>
 
                 <section class="_card _card-column _card-popular">
@@ -321,7 +351,7 @@ get_header();
                         <a href="#">Facebook ปรับระบบซื้อโฆษณาให้โปร่งใสมากขึ้น</a>
                       </h2>
                     </div>
-                </section>
+                </section>*/ ?>
               </section>
               <!-- /.listing-card -->
             </section>
@@ -343,74 +373,89 @@ get_header();
         <div class="swiper-trend swiper-container">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide swiper-no-swiping">
-                  <section class="_card _card-column _card-content">
+              <?php 
+                $args = array(
+                  // 'post__not_in' => $do_not_duplicate,
+                  // 'post_type' => 'post',
+                  // 'category_name' => 'suggested',
+                  'posts_per_page' => 4
+                  );
+                $the_query = new WP_Query( $args );
+                  
+                while ( $the_query->have_posts() ) : $the_query->the_post();
+                  //$do_not_duplicate[] = get_the_ID();
+                  get_template_part( 'template-parts/content', 'card-carousel-video' );
+                endwhile; wp_reset_postdata();
+              ?>
+              <?php /*
+              <!-- Slides -->
+              <div class="swiper-slide swiper-no-swiping">
+                <section class="_card _card-column _card-content">
+                  <div class="thumb view zoom">
+                      <a href="#" class="parent">
+                        <i class="icon icon-play"></i>
+                        <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-01@2x.jpg')">
+                        </span>
+                      </a>
+                  </div>
+                  <div class="info" data-mh="info-trend">
+                    <h2 class="title non-margin">
+                      <a href="#">นักการตลาดไทย รู้อะไรจากคลิป “ไปสยาม แต่งตัวร่วมแสน!!”</a>
+                    </h2>
+                  </div>
+                </section>
+              </div>
+
+              <div class="swiper-slide swiper-no-swiping">
+                <section class="_card _card-column _card-content">
                     <div class="thumb view zoom">
                         <a href="#" class="parent">
                           <i class="icon icon-play"></i>
-                          <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-01@2x.jpg')">
+                          <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-02@2x.jpg')">
                           </span>
                         </a>
                     </div>
                     <div class="info" data-mh="info-trend">
                       <h2 class="title non-margin">
-                        <a href="#">นักการตลาดไทย รู้อะไรจากคลิป “ไปสยาม แต่งตัวร่วมแสน!!”</a>
+                        <a href="#">เทียบรายได้ ไอศกรีมไผ่ทอง</a>
                       </h2>
                     </div>
-                  </section>
-                </div>
+                </section>
+              </div>
 
-                <div class="swiper-slide swiper-no-swiping">
-                  <section class="_card _card-column _card-content">
-                      <div class="thumb view zoom">
-                          <a href="#" class="parent">
-                            <i class="icon icon-play"></i>
-                            <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-02@2x.jpg')">
-                            </span>
-                          </a>
-                      </div>
-                      <div class="info" data-mh="info-trend">
-                        <h2 class="title non-margin">
-                          <a href="#">เทียบรายได้ ไอศกรีมไผ่ทอง</a>
-                        </h2>
-                      </div>
-                  </section>
-                </div>
+              <div class="swiper-slide swiper-no-swiping">
+                <section class="_card _card-column _card-content">
+                    <div class="thumb view zoom">
+                        <a href="#" class="parent">
+                          <i class="icon icon-play"></i>
+                          <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-03@2x.jpg')">
+                          </span>
+                        </a>
+                    </div>
+                    <div class="info" data-mh="info-trend">
+                      <h2 class="title non-margin">
+                        <a href="#">ฟัง 1 วิธีคิดของ Sheryl Sandberg ทำได้ก็พัฒนาตัวเองสำเร็จ</a>
+                      </h2>
+                    </div>
+                </section>
+              </div>
 
-                <div class="swiper-slide swiper-no-swiping">
-                  <section class="_card _card-column _card-content">
-                      <div class="thumb view zoom">
-                          <a href="#" class="parent">
-                            <i class="icon icon-play"></i>
-                            <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-03@2x.jpg')">
-                            </span>
-                          </a>
-                      </div>
-                      <div class="info" data-mh="info-trend">
-                        <h2 class="title non-margin">
-                          <a href="#">ฟัง 1 วิธีคิดของ Sheryl Sandberg ทำได้ก็พัฒนาตัวเองสำเร็จ</a>
-                        </h2>
-                      </div>
-                  </section>
-                </div>
-
-                <div class="swiper-slide swiper-no-swiping">
-                  <section class="_card _card-column _card-content">
-                      <div class="thumb view zoom">
-                          <a href="#" class="parent">
-                            <i class="icon icon-play"></i>
-                            <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-04@2x.jpg')">
-                            </span>
-                          </a>
-                      </div>
-                      <div class="info" data-mh="info-trend">
-                        <h2 class="title non-margin">
-                          <a href="#">เทียบรายได้ ไอศกรีมไผ่ทอง</a>
-                        </h2>
-                      </div>
-                  </section>
-                </div>
+              <div class="swiper-slide swiper-no-swiping">
+                <section class="_card _card-column _card-content">
+                    <div class="thumb view zoom">
+                        <a href="#" class="parent">
+                          <i class="icon icon-play"></i>
+                          <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-trend-04@2x.jpg')">
+                          </span>
+                        </a>
+                    </div>
+                    <div class="info" data-mh="info-trend">
+                      <h2 class="title non-margin">
+                        <a href="#">เทียบรายได้ ไอศกรีมไผ่ทอง</a>
+                      </h2>
+                    </div>
+                </section>
+              </div>*/ ?>
             </div>
         </div>
         <!-- /.Slider main container -->
@@ -431,138 +476,170 @@ get_header();
       </header>
 
       <div class="container _container-full-mobile">
-        <article class="section-highlight">
-            <section class="_card _card-column _size-big _bg-darkblack">
-                <div class="row">
-                    <div class="col-md-7">
-                      <div class="thumb view zoom">
-                          <a href="#" class="parent">
-                              <span class="title h3 d-block d-md-none">
-                                <span class="group-table">
-                                  <span class="group-table-cell">
-                                      <span class="color-brand header">Business เงินถึง!!<br class="d-block d-md-none">Minor ยังสนใจซื้อหุ้น NH Group เพิ่ม</span><br class="d-block d-md-none">
-                                      <span class="intro color-white">ฟุ้งรายได้บริษัทโต<br class="d-block d-md-none"> อย่างสวยงาม</span>
-                                  </span>
-                                </span>
-                              </span>
-                              <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/conference-01@2x.jpg')">
-                              </span>
-                          </a>
-                      </div>
-                    </div>
-                    <div class="col-md-5">
-                      <div class="info d-none d-md-block">
-                        <header>
-                          <p class="cat text-uppercase">CONFERENCE</p>
-                          <h2 class="title h3">
-                            <a href="#">Business เงินถึง!!Minor ยังสนใจซื้อหุ้น NH Group เพิ่ม ฟุ้งรายได้</a>
-                          </h2>
-                        </header>
-                        <footer>
-                          <ul class="list-author-by list-unstyled list-inline">
-                            <li class="list-inline-item">By <span class="name">jakrapong</span></li>
-                            <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
-                          </ul>
-                        </footer>
-                      </div>
-                    </div>
-                </div>
-            </section>
-        </article>
-
-        <article class="listing-card">
+        <div class="section-highlight">
+        <?php 
+          $args = array(
+            // 'post__not_in' => $do_not_duplicate,
+            // 'post_type' => 'post',
+            // 'category_name' => 'suggested',
+            'posts_per_page' => 1
+            );
+          $the_query = new WP_Query( $args );
+            
+          while ( $the_query->have_posts() ) : $the_query->the_post();
+            //$do_not_duplicate[] = get_the_ID();
+            get_template_part( 'template-parts/content', 'front-list-big' );
+          endwhile; wp_reset_postdata();
+        ?>
+<?php /*
+          <section class="_card _card-column _size-big _bg-darkblack">
             <div class="row">
-              <div class="col-md-4">
-                <section class="_card _card-row _border-bottom">
-                    <div class="row">
-                        <div class="col-6 col-md-12">
-                          <div class="thumb view zoom">
-                              <a href="#" class="parent">
-                                <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-news-02@2x.jpg')">
-                                </span>
-                              </a>
-                          </div>
-                        </div>
-                        <div class="col-6 col-md-12">
-                          <div class="info">
-                            <header>
-                              <p class="cat"><span class="text-uppercase">TIPS</span> <span class="day d-inline-block d-md-none color-brand">Sep 27, 2018</span></p>
-                              <h2 class="title h5 insert-dotdotdot">
-                                <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
-                              </h2>
-                            </header>
-                            <footer class="d-none d-sm-none d-md-block">
-                              <ul class="list-author-by list-unstyled list-inline">
-                                <li class="list-inline-item">By <span class="name">jakrapong</span></li>
-                                <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
-                              </ul>
-                            </footer>
-                          </div>
-                        </div>
-                    </div>
-                </section>
+              <div class="col-md-7">
+                <div class="thumb view zoom">
+                  <a href="#" class="parent">
+                    <span class="title h3 d-block d-md-none">
+                      <span class="group-table">
+                        <span class="group-table-cell">
+                            <span class="color-brand header">Business เงินถึง!!<br class="d-block d-md-none">Minor ยังสนใจซื้อหุ้น NH Group เพิ่ม</span><br class="d-block d-md-none">
+                            <span class="intro color-white">ฟุ้งรายได้บริษัทโต<br class="d-block d-md-none"> อย่างสวยงาม</span>
+                        </span>
+                      </span>
+                    </span>
+                    <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/conference-01@2x.jpg')"></span>
+                  </a>
+                </div>
               </div>
-              <div class="col-md-4">
-                <section class="_card _card-row _border-bottom">
-                    <div class="row">
-                        <div class="col-6 col-md-12">
-                          <div class="thumb view zoom">
-                              <a href="#" class="parent">
-                                <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-news-03@2x.jpg')">
-                                </span>
-                              </a>
-                          </div>
-                        </div>
-                        <div class="col-6 col-md-12">
-                          <div class="info">
-                            <header>
-                              <p class="cat"><span class="text-uppercase">TIPS</span> <span class="day d-inline-block d-md-none color-brand">Sep 27, 2018</span></p>
-                              <h2 class="title h5 insert-dotdotdot">
-                                <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
-                              </h2>
-                            </header>
-                            <footer class="d-none d-sm-none d-md-block">
-                              <ul class="list-author-by list-unstyled list-inline">
-                                <li class="list-inline-item">By <span class="name">jakrapong</span></li>
-                                <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
-                              </ul>
-                            </footer>
-                          </div>
-                        </div>
-                    </div>
-                </section>
-              </div>
-              <div class="col-md-4">
-                <section class="_card _card-row _border-bottom">
-                    <div class="row">
-                        <div class="col-6 col-md-12">
-                          <div class="thumb view zoom">
-                              <a href="#" class="parent">
-                                <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-news-04@2x.jpg')">
-                                </span>
-                              </a>
-                          </div>
-                        </div>
-                        <div class="col-6 col-md-12">
-                          <div class="info">
-                            <header>
-                              <p class="cat"><span class="text-uppercase">TIPS</span> <span class="day d-inline-block d-md-none color-brand">Sep 27, 2018</span></p>
-                              <h2 class="title h5 insert-dotdotdot">
-                                <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
-                              </h2>
-                            </header>
-                            <footer class="d-none d-sm-none d-md-block">
-                              <ul class="list-author-by list-unstyled list-inline">
-                                <li class="list-inline-item">By <span class="name">jakrapong</span></li>
-                                <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
-                              </ul>
-                            </footer>
-                          </div>
-                        </div>
-                    </div>
-                </section>
+              <div class="col-md-5">
+                <div class="info d-none d-md-block">
+                  <header>
+                    <p class="cat text-uppercase">CONFERENCE</p>
+                    <h2 class="title h3">
+                      <a href="#">Business เงินถึง!!Minor ยังสนใจซื้อหุ้น NH Group เพิ่ม ฟุ้งรายได้</a>
+                    </h2>
+                  </header>
+                  <footer>
+                    <ul class="list-author-by list-unstyled list-inline">
+                      <li class="list-inline-item">By <span class="name">jakrapong</span></li>
+                      <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
+                    </ul>
+                  </footer>
+                </div>
               </div>
             </div>
+          </section>*/ ?>
+        </div>
+
+        <article class="listing-card">
+          <div class="row">
+            <?php 
+              $args = array(
+                // 'post__not_in' => $do_not_duplicate,
+                // 'post_type' => 'post',
+                // 'category_name' => 'suggested',
+                'posts_per_page' => 3,
+                'offset' => 1
+                );
+              $the_query = new WP_Query( $args );
+                
+              while ( $the_query->have_posts() ) : $the_query->the_post();
+                //$do_not_duplicate[] = get_the_ID();
+                echo '<div class="col-md-4">';
+                get_template_part( 'template-parts/content', 'card-border' );
+                echo '</div>';
+              endwhile; wp_reset_postdata();
+            ?>
+            <?php /*
+            <div class="col-md-4">
+              <section class="_card _card-row _border-bottom">
+                  <div class="row">
+                      <div class="col-6 col-md-12">
+                        <div class="thumb view zoom">
+                            <a href="#" class="parent">
+                              <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-news-02@2x.jpg')">
+                              </span>
+                            </a>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-12">
+                        <div class="info">
+                          <header>
+                            <p class="cat"><span class="text-uppercase">TIPS</span> <span class="day d-inline-block d-md-none color-brand">Sep 27, 2018</span></p>
+                            <h2 class="title h5 insert-dotdotdot">
+                              <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
+                            </h2>
+                          </header>
+                          <footer class="d-none d-sm-none d-md-block">
+                            <ul class="list-author-by list-unstyled list-inline">
+                              <li class="list-inline-item">By <span class="name">jakrapong</span></li>
+                              <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
+                            </ul>
+                          </footer>
+                        </div>
+                      </div>
+                  </div>
+              </section>
+            </div>
+            <div class="col-md-4">
+              <section class="_card _card-row _border-bottom">
+                  <div class="row">
+                      <div class="col-6 col-md-12">
+                        <div class="thumb view zoom">
+                            <a href="#" class="parent">
+                              <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-news-03@2x.jpg')">
+                              </span>
+                            </a>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-12">
+                        <div class="info">
+                          <header>
+                            <p class="cat"><span class="text-uppercase">TIPS</span> <span class="day d-inline-block d-md-none color-brand">Sep 27, 2018</span></p>
+                            <h2 class="title h5 insert-dotdotdot">
+                              <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
+                            </h2>
+                          </header>
+                          <footer class="d-none d-sm-none d-md-block">
+                            <ul class="list-author-by list-unstyled list-inline">
+                              <li class="list-inline-item">By <span class="name">jakrapong</span></li>
+                              <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
+                            </ul>
+                          </footer>
+                        </div>
+                      </div>
+                  </div>
+              </section>
+            </div>
+            <div class="col-md-4">
+              <section class="_card _card-row _border-bottom">
+                  <div class="row">
+                      <div class="col-6 col-md-12">
+                        <div class="thumb view zoom">
+                            <a href="#" class="parent">
+                              <span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-news-04@2x.jpg')">
+                              </span>
+                            </a>
+                        </div>
+                      </div>
+                      <div class="col-6 col-md-12">
+                        <div class="info">
+                          <header>
+                            <p class="cat"><span class="text-uppercase">TIPS</span> <span class="day d-inline-block d-md-none color-brand">Sep 27, 2018</span></p>
+                            <h2 class="title h5 insert-dotdotdot">
+                              <a href="#">Samsung ใช้พลัง Twitter จุดกระแสให้ Note9</a>
+                            </h2>
+                          </header>
+                          <footer class="d-none d-sm-none d-md-block">
+                            <ul class="list-author-by list-unstyled list-inline">
+                              <li class="list-inline-item">By <span class="name">jakrapong</span></li>
+                              <li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
+                            </ul>
+                          </footer>
+                        </div>
+                      </div>
+                  </div>
+              </section>
+            </div>*/ ?>
+          </div>
         </article>
 
         <footer class="footer-button">
@@ -584,6 +661,21 @@ get_header();
         <div class="swiper-editor swiper-container">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
+                <?php 
+                  $args = array(
+                    // 'post__not_in' => $do_not_duplicate,
+                    // 'post_type' => 'post',
+                    // 'category_name' => 'suggested',
+                    'posts_per_page' => 4
+                    );
+                  $the_query = new WP_Query( $args );
+                    
+                  while ( $the_query->have_posts() ) : $the_query->the_post();
+                    //$do_not_duplicate[] = get_the_ID();
+                    get_template_part( 'template-parts/content', 'card-carousel' );
+                  endwhile; wp_reset_postdata();
+                ?>
+                <?php /*
                 <!-- Slides -->
                 <div class="swiper-slide swiper-no-swiping">
                   <section class="_card _card-column _card-content">
@@ -648,6 +740,7 @@ get_header();
                       </div>
                   </section>
                 </div>
+                */ ?>
             </div>
         </div>
         <!-- /.Slider main container -->
@@ -665,7 +758,22 @@ get_header();
         <header>
           <h1 class="_section-title h3 text-uppercase"><span class="name">Events & Conferences</span></h1>
         </header>
-        <article class="section-highlight">
+        <div class="section-highlight">
+          <?php 
+            $args = array(
+              // 'post__not_in' => $do_not_duplicate,
+              // 'post_type' => 'post',
+              // 'category_name' => 'suggested',
+              'posts_per_page' => 1
+              );
+            $the_query = new WP_Query( $args );
+              
+            while ( $the_query->have_posts() ) : $the_query->the_post();
+              //$do_not_duplicate[] = get_the_ID();
+              get_template_part( 'template-parts/content', 'front-list-big' );
+            endwhile; wp_reset_postdata();
+          ?>
+<?php /*
             <section class="_card _card-column _size-big _bg-darkblack">
                 <div class="row">
                     <div class="col-md-7">
@@ -701,11 +809,29 @@ get_header();
                       </div>
                     </div>
                 </div>
-            </section>
-        </article>
+            </section>*/ ?>
+        </div>
 
-        <article class="listing-card">
+        <div class="listing-card">
             <div class="row">
+              <?php 
+                $args = array(
+                  // 'post__not_in' => $do_not_duplicate,
+                  // 'post_type' => 'post',
+                  // 'category_name' => 'suggested',
+                  'posts_per_page' => 3,
+                  'offset' => 1
+                  );
+                $the_query = new WP_Query( $args );
+                  
+                while ( $the_query->have_posts() ) : $the_query->the_post();
+                  //$do_not_duplicate[] = get_the_ID();
+                  echo '<div class="col-md-4">';
+                  get_template_part( 'template-parts/content', 'card-border' );
+                  echo '</div>';
+                endwhile; wp_reset_postdata();
+              ?>
+              <?php /*
               <div class="col-md-4">
                 <section class="_card _card-row _border-bottom" data-mh="group-height-event">
                     <div class="row">
@@ -795,9 +921,9 @@ get_header();
                         </div>
                     </div>
                 </section>
-              </div>
+              </div>*/ ?>
             </div>
-        </article>
+          </div>
 
         <footer class="footer-button">
           <a href="#" class="button button-outline"><span>ALL EVENTS & CONFERENCES</span> <i class="icon icon-arrow-right"></i></a>
