@@ -116,14 +116,18 @@ __contentSwipe.prototype = {
 
     this.$container
       .swipe({
-        swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+        swipeLeft: function(event, direction, distance, duration, fingerCount, fingerData) {
           if (self.busy) return;
 
-          if (direction === 'left' && $('.content-carousel-item.next').length > 0) {
-            swipeAction(direction);
+          if ($('.content-carousel-item.next').length > 0) {
+            swipeAction('left');
           }
-          else if (direction === 'right' && $('.content-carousel-item.prev').length > 0) {
-            swipeAction(direction);
+        },
+        swipeRight: function(event, direction, distance, duration, fingerCount, fingerData) {
+          if (self.busy) return;
+
+          if ($('.content-carousel-item.prev').length > 0) {
+            swipeAction('right');
           }
         }
       });
