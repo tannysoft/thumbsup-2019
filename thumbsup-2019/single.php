@@ -9,7 +9,7 @@
 
 get_header();
 ?>
-<div id="wrapper-swipe-content" class="page_news _bg-marble">
+<div class="page_news _bg-marble">
 	<!-- LEAD COVER -->
     <section class="_lead-cover">
       <div class="bg-cover" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>');">

@@ -138,5 +138,9 @@ Tags: featured-images, custom-menu
   .content-editor p {
     margin-bottom: 1.8rem; }
 
+@media (max-width: 767px) {
+  ._lead-cover {
+    margin-top: 60px; } }
+
 .entry-footer .edit-link {
   display: none; }

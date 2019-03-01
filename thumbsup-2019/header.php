@@ -22,7 +22,7 @@
 <body <?php body_class(); ?>>
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'plant' ); ?></a>
 	<div id="page" class="site">
-		
+
 		<?php /*<nav id="site-mobile-navigation" class="site-mobile-navigation <?php if($GLOBALS['s_menu'] == 'off-canvas') { echo 'sb-slidebar sb-right'; } else { echo '-dropdown'; } ?> _mobile _heading">
 			<?php wp_nav_menu( array( 'theme_location' => 'mobile', 'menu_id' => 'mobile-menu' ) ); ?>
 			<?php if(is_active_sidebar('top-right')) { ?><div class="mobile-widget"><?php dynamic_sidebar( 'top-right' ); ?></div><?php } ?>
@@ -269,7 +269,7 @@
 			</div>
 		</header>*/ ?>
 
-		<div id="sb-site" class="site-canvas">
+		<div id="<?php echo (is_single()) ? 'wrapper-swipe-content' : 'sb-site'; ?>" class="site-canvas">
 
 			<?php 
 			if (is_front_page()) {
