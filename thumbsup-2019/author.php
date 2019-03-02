@@ -52,19 +52,6 @@ $author->ID;
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-	<?php 
-	switch ($GLOBALS['s_blog_layout']) {
-		case 'rightbar':
-		get_sidebar('right'); 
-		break;
-		case 'leftbar':
-		get_sidebar('left'); 
-		break;
-		case 'full-width':
-		break;
-		default:
-		break;
-	}
-	?>
+	
 </div><!--container-->
 <?php get_footer(); ?>
