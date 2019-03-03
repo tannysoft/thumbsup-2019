@@ -228,6 +228,8 @@ __contentSwipe.prototype = {
     var requestURL = this.settings.devMode ? location.href : data.link;
 
     $.get(requestURL, function(htmlString) {
+      !this.settings.devMode && history.pushState(data.link);
+
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
       var prevContent = $(div).find(self.settings.target).parent().html();
@@ -266,6 +268,8 @@ __contentSwipe.prototype = {
     var requestURL = this.settings.devMode ? location.href : data.link;
 
     $.get(requestURL, function(htmlString) {
+      !this.settings.devMode && history.pushState(data.link);
+
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
       var nextContent = $(div).find(self.settings.target).parent().html();
