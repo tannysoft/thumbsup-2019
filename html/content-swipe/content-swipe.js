@@ -135,6 +135,7 @@ __contentSwipe.prototype = {
 
   afterSlideEnd: function(direction) {
     var self = this;
+    var currenntData = null;
     var currentId = null;
     var $prev = this.$container.find('.content-carousel-item.prev');
     var $current = this.$container.find('.content-carousel-item.current');
@@ -144,6 +145,7 @@ __contentSwipe.prototype = {
       $current.removeClass('current').addClass('prev');
       $next.removeClass('next').addClass('current');
 
+      currenntData = this.data.next;
       currentId = this.data.next.id;
 
       // mock content index
@@ -158,6 +160,7 @@ __contentSwipe.prototype = {
       $current.removeClass('current').addClass('next');
       $prev.removeClass('prev').addClass('current');
 
+      currenntData = this.data.previous;
       currentId = this.data.previous.id;
 
       // mock content index
@@ -170,6 +173,7 @@ __contentSwipe.prototype = {
     }
 
     this.$container.addClass('end');
+    this.setNewUrlToBrowser(currenntData);
     this.resetContainerPosition();
 
     var mod = this.currentContentIndex % this.navItemsPerPage;
@@ -228,10 +232,10 @@ __contentSwipe.prototype = {
     var requestURL = this.settings.devMode ? location.href : data.link;
 
     $.get(requestURL, function(htmlString) {
-      !this.settings.devMode && history.pushState(data.link);
-
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
+
+      data.title = $(div).find('title').text();
       var prevContent = $(div).find(self.settings.target).parent().html();
 
       var $prevItem = self.$container.find('.content-carousel-item.prev');
@@ -268,10 +272,10 @@ __contentSwipe.prototype = {
     var requestURL = this.settings.devMode ? location.href : data.link;
 
     $.get(requestURL, function(htmlString) {
-      !this.settings.devMode && history.pushState(data.link);
-
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
+
+      data.title = $(div).find('title').text();
       var nextContent = $(div).find(self.settings.target).parent().html();
 
       var $nextItem = self.$container.find('.content-carousel-item.next');
@@ -299,6 +303,11 @@ __contentSwipe.prototype = {
         }
       });
     });
+  },
+
+  setNewUrlToBrowser: function(data) {
+    !this.settings.devMode && window.history.pushState(null, null, data.link);
+    document.title = data.title;
   }
 }
 
