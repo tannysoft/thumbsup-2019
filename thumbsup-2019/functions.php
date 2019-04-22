@@ -24,7 +24,7 @@ $GLOBALS['s_shop_pagebuilder'] 		= '0';
 $GLOBALS['s_fontawesome'] 				= 'disable';
 $GLOBALS['s_wp_comments'] 				= 'disable';
 
-
+require_once get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
 
 
 if ( ! function_exists( 'seed_setup' ) ) {
@@ -39,11 +39,12 @@ if ( ! function_exists( 'seed_setup' ) ) {
 			'flex-height' => true,
 		) );
 		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 370, 277, TRUE );
+		set_post_thumbnail_size( 370, 277, true );
 		add_image_size( 'list-medium', 498, 297, true );
 		add_image_size( 'list-large', 704, 400, true );
 		add_image_size( 'card-mostview', 250, 143, true );
 		add_image_size( 'card-videos', 353, 202, true );
+		add_image_size( 'card-vertical', 202, 353, true );
 		register_nav_menus( array(
 			'primary' => esc_html__( 'Main Menu', 'plant' ),
 			'mobile' => esc_html__( 'Mobile Menu', 'plant' ),
@@ -73,6 +74,8 @@ function seed_theme_updater() {
 }
 add_action( 'after_setup_theme', 'seed_theme_updater' );
 
+//require( get_template_directory() . '/admin/post-type-speeches.php' );
+
 /**
  * Register widget area.
  */
@@ -96,8 +99,8 @@ function seed_widgets_init() {
 		'after_title'   => '</h1>',
 	) );
 	register_sidebar( array(
-		'name'          => esc_html__( 'Shop Sidebar', 'plant' ),
-		'id'            => 'shopbar',
+		'name'          => esc_html__( 'Category Topbar', 'plant' ),
+		'id'            => 'cat_bar',
 		'description'   => '',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
@@ -153,18 +156,27 @@ function seed_widgets_init() {
 }
 add_action( 'widgets_init', 'seed_widgets_init' );
 
+function replace_core_jquery_version() {
+	wp_deregister_script( 'jquery' );
+	// Change the URL if you want to load a local copy of jQuery from your own server.
+	wp_register_script( 'jquery', "https://code.jquery.com/jquery-3.1.1.min.js", array(), '3.1.1' );
+}
+add_action( 'wp_enqueue_scripts', 'replace_core_jquery_version' );
+
 /**
  * Enqueue scripts and styles.
  */
 function seed_scripts() {
-	wp_enqueue_style( 'ts-font-awesome', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css' );
+	//wp_enqueue_style( 'ts-font-awesome', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css' );
+	wp_enqueue_style( 'ts-font-awesome', get_template_directory_uri() . '/vendor/fonts/font-awesome-5/css/all.min.css' );
 	wp_enqueue_style( 'ts-bootstrap', get_template_directory_uri() . '/css/bootstrap.css' );
 	wp_enqueue_style( 'ts-ts-style', get_template_directory_uri() . '/css/style.css' );
 	wp_enqueue_style( 'ts-main', get_template_directory_uri() . '/css/main.css' );
+	wp_enqueue_style( 'slick', get_template_directory_uri() . '/lib/slick/slick.css' );
 	if(is_single()) {
 		wp_enqueue_style( 'ts-content-swipe', get_template_directory_uri() . '/vendor/content-swipe/content-swipe.css' );
 	}
-	wp_enqueue_style( 'ts-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'ts-style', get_stylesheet_uri(), array(), '0.1.02', 'all' );
 	/* CSS */
 	//wp_enqueue_style( 'ts-bootstrap4', get_template_directory_uri() . '/css/bootstrap4.min.css' );
 	//wp_enqueue_style( 'ts-min', get_template_directory_uri() . '/css/style.min.css' );
@@ -176,6 +188,7 @@ function seed_scripts() {
 	wp_enqueue_script( 'ts-match-height', get_template_directory_uri() . '/vendor/jquery/jquery.matchHeight-min.js', array(), '2019-1', true );
 	wp_enqueue_script( 'ts-dotdotdot', get_template_directory_uri() . '/vendor/jquery/jquery.dotdotdot.js', array(), '2019-1', true );
 	wp_enqueue_script( 'ts-swiper', get_template_directory_uri() . '/vendor/jquery/swiper.min.js', array(), '2019-1', true );
+	wp_enqueue_script( 'slick', get_template_directory_uri() . '/lib/slick/slick.js', array('jquery'), '', true );
 
 	wp_enqueue_script( 'ts-jquery-easing', get_template_directory_uri() . '/vendor/jquery/jquery.easing.min.js', array(), '2019-1', true );
 	wp_enqueue_script( 'ts-jquery-sticky-navbar', get_template_directory_uri() . '/vendor/jquery/jquery.stickyNavbar.min.js', array(), '2019-1', true );
@@ -198,6 +211,19 @@ function seed_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'seed_scripts' );
 
+function thumbsup_dequeue_styles() {
+	wp_dequeue_style( 'wpmm_fontawesome_css' );
+	wp_dequeue_style( 'font-awesome' );
+}
+add_action( 'wp_print_styles', 'thumbsup_dequeue_styles', 100 );
+
+add_action( 'elementor/frontend/after_enqueue_styles', function () { wp_dequeue_style( 'font-awesome' ); } );
+/*
+function thumbsup_dequeue_script() {
+	wp_dequeue_script( 'jquery-ui-core' );
+}
+add_action( 'wp_print_scripts', 'thumbsup_dequeue_script', 100 );
+*/
 /**
  * Registers an editor stylesheet for the theme.
  */
@@ -432,7 +458,6 @@ function plant_register_required_plugins() {
 }
 if( class_exists('Kirki') ) { include_once( dirname( __FILE__ ) . '/inc/kirki.php' );}
 */
-
 // Add filter to respond with next and previous post in post response.
 add_filter( 'rest_prepare_post', function( $response, $post, $request ) {
 
@@ -442,11 +467,11 @@ add_filter( 'rest_prepare_post', function( $response, $post, $request ) {
 	// Get the so-called previous post.
 	$previous = get_adjacent_post( false, '', true );
 	// Format them a bit and only send id and slug (or null, if there is no next/previous post).
-	$response->data['next'] = ( is_a( $next, 'WP_Post') ) ? array( "id" => $next->ID, "link" => get_the_permalink($next->ID) ) : null;
-	$response->data['previous'] = ( is_a( $previous, 'WP_Post') ) ? array( "id" => $previous->ID, "link" => get_the_permalink($previous->ID) ) : null;
+	$response->data['previous'] = ( is_a( $next, 'WP_Post') ) ? array( "id" => $next->ID, "link" => get_the_permalink($next->ID) ) : null;
+	$response->data['next'] = ( is_a( $previous, 'WP_Post') ) ? array( "id" => $previous->ID, "link" => get_the_permalink($previous->ID) ) : null;
   
 	return $response;
-}, 10, 3 );
+  }, 10, 3 );
 
 function thumbsup_posted_on() {
 	echo '<ul class="list-author-by list-unstyled list-inline">
@@ -454,3 +479,27 @@ function thumbsup_posted_on() {
 		<li class="list-inline-item"><span class="day">Sep 27, 2018</span></li>
 	</ul>';
 }
+add_filter('pre_get_posts', function ($query) {
+	if (is_category()) {
+		$query->set('posts_per_page', 26);
+	}
+
+	return $query;
+});
+function posts_for_current_author($query) {
+    global $pagenow;
+
+    if( 'edit.php' != $pagenow || !$query->is_admin )
+        return $query;
+
+    if( !current_user_can( 'edit_others_posts' ) ) {
+        global $user_ID;
+        $query->set('author', $user_ID );
+    }
+    return $query;
+}
+function register_my_menu() {
+	register_nav_menu('category-menu',__( 'Category Menu' ));
+	register_nav_menu('footer-menu',__( 'Footer Menu' ));
+  }
+  add_action( 'init', 'register_my_menu' );

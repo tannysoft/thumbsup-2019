@@ -31,9 +31,13 @@
 <?php endif;*/ ?>
 
 	<!-- STAY UPDATE -->
-	<section class="section-stay-update _section _bg-gradient">
+	<section class="section-stay-update _section"><?php /*  _bg-gradient */ ?>
 		<div class="container _show-relative">
-			<h1 class="_section-title _font-size-60"><span class="name">STAY UPDATE</span></h1>
+			<h2 class="_section-title _font-size-60"><span class="name">STAY UPDATE</span></h2>
+				<div class="form-subscribe">
+					<?php echo do_shortcode('[mc4wp_form id="110797"]'); ?>
+				</div>
+				<?php /*
 				<form action="#" class="form-subscribe">
 					<div class="form-group">
 						<input type="email" id="" placeholder="your email">
@@ -45,7 +49,7 @@
 							</span>
 						</button>
 					</div>
-				</form>
+				</form>*/ ?>
 		</div>
 	</section>
 
@@ -54,15 +58,7 @@
 	<div class="container">
 
 		<section class="primary d-none d-md-block">
-			<ul class="list-menu list-inline text-uppercase">
-				<li class="list-inline-item"><a href="#">HOME</a></li>
-				<li class="list-inline-item"><a href="#">NEWS</a></li>
-				<li class="list-inline-item"><a href="#">EVENTS & CONFERECES</a></li>
-				<li class="list-inline-item"><a href="#">ABOUT US</a></li>
-				<li class="list-inline-item"><a href="#">Contact</a></li>
-				<li class="list-inline-item"><a href="#">PRIVACY POLICY</a></li>
-				<li class="list-inline-item"><a href="#">TERMS & CONDITIONS</a></li>
-			</ul>
+			<?php wp_nav_menu( array( 'theme_location' => 'footer-menu' ) ); ?>
 		</section>
 
 		<section class="secondary">

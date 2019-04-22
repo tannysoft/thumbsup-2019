@@ -16,9 +16,9 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('swiper-slide swiper-no-swiping'); ?>>
 	<section class="_card _card-column _card-content">
 		<div class="thumb view zoom">
-			<a href="<?php the_permalink(); ?>" class="parent" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark">
-				<span class="img-photo" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'card-videos'); ?>');"></span>
-				<?php //if(has_post_thumbnail()) { the_post_thumbnail();} else { echo '<img src="' . esc_url( get_template_directory_uri()) .'/img/thumb.jpg" alt="'. get_the_title() .'" />'; }?>
+			<a href="<?php the_permalink(); ?>" class="parent-link" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark">
+				<?php /*<span class="img-photo" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'card-videos'); ?>');"></span>*/ ?>
+				<?php if(has_post_thumbnail()) { the_post_thumbnail('card-videos');} else { echo '<img src="' . esc_url( get_template_directory_uri()) .'/img/thumb.jpg" alt="'. get_the_title() .'" />'; }?>
 			</a>
 		</div><!--pic-->
 		<div class="info" data-mh="info-trend">

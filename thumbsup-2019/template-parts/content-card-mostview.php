@@ -15,8 +15,9 @@
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('_card _card-column _card-popular'); ?>>
 	<div class="thumb view zoom">
-		<a href="<?php the_permalink(); ?>" class="parent" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark">
-			<span class="img-photo" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'card-mostview'); ?>');"></span>
+		<a href="<?php the_permalink(); ?>" class="parent-link" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark">
+			<?php //<span class="img-photo" style="background-image: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'card-mostview'); ');"></span> ?>
+			<img class="img-photo" alt="file name" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'card-mostview'); ?>');" />
 			<?php //if(has_post_thumbnail()) { the_post_thumbnail();} else { echo '<img src="' . esc_url( get_template_directory_uri()) .'/img/thumb.jpg" alt="'. get_the_title() .'" />'; }?>
 		</a>
 	</div><!--pic-->

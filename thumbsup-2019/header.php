@@ -19,7 +19,7 @@
 	<?php if (function_exists('customize_ini')) {customize_ini();} ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php echo (is_single()) ? 'data-init-content-id="' . get_the_ID() . '" ': ''; ?><?php body_class(); ?>>
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'plant' ); ?></a>
 	<div id="page" class="site">
 
@@ -40,12 +40,12 @@
 						<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
 						</ul>
 					</li>
-					<li class="list-inline-item">
+<?php /*					<li class="list-inline-item">
 						<ul class="list-inline tool-language">
 						<li class="list-inline-item"><a href="#" class="active">ไทย</a></li>
 						<li class="list-inline-item"><a href="#">ENG</a></li>
 						</ul>
-					</li>
+					</li>*/ ?>
 					</ul>
 				</div>
 			</section>
@@ -59,191 +59,224 @@
 			<!--  Hamburger menu icon -->
 
 			<section class="primary header-sticky">
-			<div class="container">
-				<nav id="navbar" class="navbar navbar-expand-xl navbar-light">
-					<div class="d-block d-xl-none">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home">
-							<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
-							<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
-						</a>
-					</div>
-
-					<div class="main-menu collapse navbar-collapse d-none d-xl-block">
-					<div class="wsmenu group-nav navbar-right">
-						<ul class="wsmenu-list navbar-nav mr-auto text-uppercase text-nowrap">
-						<li class="logo-brand">
-							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home">
-								<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
-								<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
-							</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="javascript:void(0);">Home</a>
-						</li>
-						<li class="nav-item" aria-haspopup="true"><a href="news.html" onclick="close(); return false">News<span class="wsarrow"></span></a>
-							<div class="wsmegamenu clearfix">
-							<div class="row no-gutters">
-								<div class="col-2">
-									<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-									<a class="nav-link active" id="v-pills-news-tab" data-toggle="pill" href="#v-pills-news" role="tab" aria-controls="v-pills-news" aria-selected="true">PR NEWS</a>
-									<a class="nav-link" id="v-pills-digital-tab" data-toggle="pill" href="#v-pills-digital" role="tab" aria-controls="v-pills-digital" aria-selected="false">DIGITAL</a>
-									<a class="nav-link" id="v-pills-tech-tab" data-toggle="pill" href="#v-pills-tech" role="tab" aria-controls="v-pills-tech" aria-selected="false">TECHNOLOGY</a>
-									<a class="nav-link" id="v-pills-business-tab" data-toggle="pill" href="#v-pills-business" role="tab" aria-controls="v-pills-business" aria-selected="false">BUSINESS</a>
-									<a class="nav-link" id="v-pills-branding-tab" data-toggle="pill" href="#v-pills-branding" role="tab" aria-controls="v-pills-branding" aria-selected="false">BRANDING</a>
-									<a class="nav-link" id="v-pills-startup-tab" data-toggle="pill" href="#v-pills-startup" role="tab" aria-controls="v-pills-startup" aria-selected="false">START UP</a>
-									<a class="nav-link" id="v-pills-tips-tab" data-toggle="pill" href="#v-pills-tips" role="tab" aria-controls="v-pills-tips" aria-selected="false">TIPS</a>
+				<div class="main-sticky">
+					<div class="container">
+						<nav id="navbar" class="navbar navbar-expand-xl navbar-light">
+							<div class="d-block d-xl-none">
+								<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home">
+									<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+									<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+								</a>
+							</div>
+							<div class="main-menu collapse navbar-collapse d-none d-xl-block">
+								<div class="wsmenu group-nav navbar-right">
+									<?php /*
+									<div class="wsmenu-list">
+										<div class="logo-brand">
+											<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home">
+												<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+												<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+											</a>
+										</div>
 									</div>
-								</div>
-								<div class="col-10">
-									<div class="tab-content" id="v-pills-tabContent">
-									<div class="tab-pane fade show active" id="v-pills-news" role="tabpanel" aria-labelledby="v-pills-news-tab">
-
-											<div class="group-swiper-in-nav">
-												<div class="swiper-button-prev swiper-news-prev"><</div>
-												<div class="swiper-button-next swiper-news-next">></div>
-											</div>
-
-											<!-- Slider main container -->
-											<div class="swiper-news swiper-container">
-												<!-- Additional required wrapper -->
-												<div class="swiper-wrapper">
-													<!-- Slides -->
-													<div class="swiper-slide swiper-no-swiping">
-													<section class="_card _card-column _card-news">
-														<p class="day">Sep 27, 2018</p>
-														<div class="thumb view zoom">
-															<a href="#" class="parent">
-																<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-01@2x.jpg')">
-																</span>
-															</a>
-														</div>
-														<div class="info" data-mh="info-news">
-															<h2 class="title non-margin insert-dotdotdot">
-															<a href="#">หนังสือน่าอ่าน “มองการทำตลาดแบบวัวสีม่วง” ที่นักการตลาดไม่ควรพลาด หนังสือน่าอ่าน “มองการทำตลาดแบบวัวสีม่วง” ที่นักการตลาดไม่ควรพลาด</a>
-															</h2>
-														</div>
-													</section>
+									<?php
+										wp_nav_menu( array(
+											'theme_location'  => 'primary',
+											'depth'	          => 2, // 1 = no dropdowns, 2 = with dropdowns.
+											'container'       => '',
+											'container_class' => 'collapse navbar-collapse',
+											'container_id'    => 'bs-example-navbar-collapse-1',
+											'menu_class'      => 'wsmenu-list navbar-nav mr-auto text-uppercase text-nowrap',
+											'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+											'walker'          => new WP_Bootstrap_Navwalker(),
+										) );*/
+									?>
+									<?php wp_megamenu(array('theme_location' => 'primary')); ?>
+									<?php /*
+									<ul class="wsmenu-list navbar-nav mr-auto text-uppercase text-nowrap">
+										<li class="logo-brand">
+											<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" rel="home">
+												<span class="d-none d-md-block"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+												<span class="d-sm-block d-md-none"><img src="<?php echo get_template_directory_uri(); ?>/img/logo/logo-thumbsup-xs.png" class="img-fluid" alt="logo thumbsup" data-rjs="2"/></span>
+											</a>
+										</li>
+										<li class="nav-item active">
+											<a class="nav-link" href="javascript:void(0);">Home</a>
+										</li>
+										<li class="nav-item" aria-haspopup="true"><a href="news.html" onclick="close(); return false">News<span class="wsarrow"></span></a>
+											<div class="wsmegamenu clearfix">
+											<div class="row no-gutters">
+												<div class="col-2">
+													<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+														<a class="nav-link active" id="v-pills-news-tab" data-toggle="pill" href="#v-pills-news" role="tab" aria-controls="v-pills-news" aria-selected="true">PR NEWS</a>
+														<a class="nav-link" id="v-pills-digital-tab" data-toggle="pill" href="#v-pills-digital" role="tab" aria-controls="v-pills-digital" aria-selected="false">DIGITAL</a>
+														<a class="nav-link" id="v-pills-tech-tab" data-toggle="pill" href="#v-pills-tech" role="tab" aria-controls="v-pills-tech" aria-selected="false">TECHNOLOGY</a>
+														<a class="nav-link" id="v-pills-business-tab" data-toggle="pill" href="#v-pills-business" role="tab" aria-controls="v-pills-business" aria-selected="false">BUSINESS</a>
+														<a class="nav-link" id="v-pills-branding-tab" data-toggle="pill" href="#v-pills-branding" role="tab" aria-controls="v-pills-branding" aria-selected="false">BRANDING</a>
+														<a class="nav-link" id="v-pills-startup-tab" data-toggle="pill" href="#v-pills-startup" role="tab" aria-controls="v-pills-startup" aria-selected="false">START UP</a>
+														<a class="nav-link" id="v-pills-tips-tab" data-toggle="pill" href="#v-pills-tips" role="tab" aria-controls="v-pills-tips" aria-selected="false">TIPS</a>
 													</div>
+												</div>
+												<div class="col-10">
+													<div class="tab-content" id="v-pills-tabContent">
+														<div class="tab-pane fade show active" id="v-pills-news" role="tabpanel" aria-labelledby="v-pills-news-tab">
 
-													<div class="swiper-slide swiper-no-swiping">
-													<section class="_card _card-column _card-news">
-														<p class="day">Sep 27, 2018</p>
-														<div class="thumb view zoom">
-															<a href="#" class="parent">
-																<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-02@2x.jpg')">
-																</span>
-															</a>
-														</div>
-														<div class="info" data-mh="info-news">
-															<h2 class="title non-margin insert-dotdotdot">
-															<a href="#">KBTG เดินหน้าปั้น TechJam2018 หวังสร้างความตื่นตัวและสีสันให้วงการเทคโนโลยี</a>
-															</h2>
-														</div>
-													</section>
-													</div>
+															<div class="group-swiper-in-nav">
+																<div class="swiper-button-prev swiper-news-prev"><</div>
+																<div class="swiper-button-next swiper-news-next">></div>
+															</div>
 
-													<div class="swiper-slide swiper-no-swiping">
-													<section class="_card _card-column _card-news">
-														<p class="day">Sep 27, 2018</p>
-														<div class="thumb view zoom">
-															<a href="#" class="parent">
-																<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-03@2x.jpg')">
-																</span>
-															</a>
-														</div>
-														<div class="info" data-mh="info-news">
-															<h2 class="title non-margin insert-dotdotdot">
-															<a href="#">ETDA Big Change to Big Chance ปรับตัวสู่โลกอนาคต..โลกแห่งยุคดิจิทัล</a>
-															</h2>
-														</div>
-													</section>
-													</div>
+															<!-- Slider main container -->
+															<div class="swiper-news swiper-container">
+																<!-- Additional required wrapper -->
+																<div class="swiper-wrapper">
+																	<!-- Slides -->
+																	<div class="swiper-slide swiper-no-swiping">
+																	<section class="_card _card-column _card-news">
+																		<p class="day">Sep 27, 2018</p>
+																		<div class="thumb view zoom">
+																			<a href="#" class="parent">
+																				<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-01@2x.jpg')">
+																				</span>
+																			</a>
+																		</div>
+																		<div class="info" data-mh="info-news">
+																			<h2 class="title non-margin insert-dotdotdot">
+																			<a href="#">หนังสือน่าอ่าน “มองการทำตลาดแบบวัวสีม่วง” ที่นักการตลาดไม่ควรพลาด หนังสือน่าอ่าน “มองการทำตลาดแบบวัวสีม่วง” ที่นักการตลาดไม่ควรพลาด</a>
+																			</h2>
+																		</div>
+																	</section>
+																	</div>
 
-													<div class="swiper-slide swiper-no-swiping">
-													<section class="_card _card-column _card-news">
-														<p class="day">Sep 27, 2018</p>
-														<div class="thumb view zoom">
-															<a href="#" class="parent">
-																<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-04@2x.jpg')">
-																</span>
-															</a>
+																	<div class="swiper-slide swiper-no-swiping">
+																	<section class="_card _card-column _card-news">
+																		<p class="day">Sep 27, 2018</p>
+																		<div class="thumb view zoom">
+																			<a href="#" class="parent">
+																				<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-02@2x.jpg')">
+																				</span>
+																			</a>
+																		</div>
+																		<div class="info" data-mh="info-news">
+																			<h2 class="title non-margin insert-dotdotdot">
+																			<a href="#">KBTG เดินหน้าปั้น TechJam2018 หวังสร้างความตื่นตัวและสีสันให้วงการเทคโนโลยี</a>
+																			</h2>
+																		</div>
+																	</section>
+																	</div>
+
+																	<div class="swiper-slide swiper-no-swiping">
+																	<section class="_card _card-column _card-news">
+																		<p class="day">Sep 27, 2018</p>
+																		<div class="thumb view zoom">
+																			<a href="#" class="parent">
+																				<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-03@2x.jpg')">
+																				</span>
+																			</a>
+																		</div>
+																		<div class="info" data-mh="info-news">
+																			<h2 class="title non-margin insert-dotdotdot">
+																			<a href="#">ETDA Big Change to Big Chance ปรับตัวสู่โลกอนาคต..โลกแห่งยุคดิจิทัล</a>
+																			</h2>
+																		</div>
+																	</section>
+																	</div>
+
+																	<div class="swiper-slide swiper-no-swiping">
+																	<section class="_card _card-column _card-news">
+																		<p class="day">Sep 27, 2018</p>
+																		<div class="thumb view zoom">
+																			<a href="#" class="parent">
+																				<span class="img-photo" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/thumb/img-editor-04@2x.jpg')">
+																				</span>
+																			</a>
+																		</div>
+																		<div class="info" data-mh="info-news">
+																			<h2 class="title non-margin insert-dotdotdot">
+																			<a href="#">5 เทคนิคถ่ายรูปสวยแบบ Influencer จาก Samsung Photo Hub</a>
+																			</h2>
+																		</div>
+																	</section>
+																	</div>
+																</div>
+															</div>
+															<!-- /.Slider main container -->
 														</div>
-														<div class="info" data-mh="info-news">
-															<h2 class="title non-margin insert-dotdotdot">
-															<a href="#">5 เทคนิคถ่ายรูปสวยแบบ Influencer จาก Samsung Photo Hub</a>
-															</h2>
-														</div>
-													</section>
+														<div class="tab-pane fade" id="v-pills-digital" role="tabpanel" aria-labelledby="v-pills-digital-tab">DIGITAL</div>
+														<div class="tab-pane fade" id="v-pills-tech" role="tabpanel" aria-labelledby="v-pills-tech-tab">TECH</div>
+														<div class="tab-pane fade" id="v-pills-business" role="tabpanel" aria-labelledby="v-pills-business-tab">BUSINESS</div>
+														<div class="tab-pane fade" id="v-pills-branding" role="tabpanel" aria-labelledby="v-pills-branding-tab">BRANDING</div>
+														<div class="tab-pane fade" id="v-pills-startup" role="tabpanel" aria-labelledby="v-pills-startup-tab">START UP</div>
+														<div class="tab-pane fade" id="v-pills-tips" role="tabpanel" aria-labelledby="v-pills-tips-tab">START UP</div>
 													</div>
 												</div>
 											</div>
-											<!-- /.Slider main container -->
-									</div>
-									<div class="tab-pane fade" id="v-pills-digital" role="tabpanel" aria-labelledby="v-pills-digital-tab">DIGITAL</div>
-									<div class="tab-pane fade" id="v-pills-tech" role="tabpanel" aria-labelledby="v-pills-tech-tab">TECH</div>
-									<div class="tab-pane fade" id="v-pills-business" role="tabpanel" aria-labelledby="v-pills-business-tab">BUSINESS</div>
-									<div class="tab-pane fade" id="v-pills-branding" role="tabpanel" aria-labelledby="v-pills-branding-tab">BRANDING</div>
-									<div class="tab-pane fade" id="v-pills-startup" role="tabpanel" aria-labelledby="v-pills-startup-tab">START UP</div>
-									<div class="tab-pane fade" id="v-pills-tips" role="tabpanel" aria-labelledby="v-pills-tips-tab">START UP</div>
-									</div>
+											</div>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="javascript:void(0);">EVENTS & CONFERENCES</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="javascript:void(0);">ABOUT US</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="javascript:void(0);">CONTACT</a>
+										</li>
+										<li class="nav-item show-went-scroll">
+											<ul class="list-inline">
+												<li class="list-inline-item">
+													<ul class="list-social list-inline">
+													<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+													<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+													<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+													<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" style="padding-right:0;" href="javascript:void(0);"><i class="icon icon-search" style="vertical-align: middle;"></i></a>
+										</li>
+									</ul>*/ ?>
 								</div>
 							</div>
-							</div>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="javascript:void(0);">EVENTS & CONFERENCES</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="javascript:void(0);">ABOUT US</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="javascript:void(0);">CONTACT</a>
-						</li>
-						<li class="nav-item show-went-scroll">
-							<ul class="list-inline">
-							<li class="list-inline-item">
-								<ul class="list-social list-inline">
-								<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
-								<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-								</ul>
-							</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" style="padding-right:0;" href="javascript:void(0);"><i class="icon icon-search" style="vertical-align: middle;"></i></a>
-						</li>
-						</ul>
-					</div>
-					</div>
-				</nav>
+						</nav>
 
-			</div>
+					</div>
+				</div>
+				<?php if(is_single()): ?>
+				<div class="single-sticky">
+					<div class="container">
+						<div class="title"><h2><?php the_title(); ?></h2></div>
+						<div class="share"><?php if(function_exists('seed_social')) {seed_social();} ?></div>
+					</div>
+				</div>
+				<?php endif; ?>
 			</section>
 
 			<!-- menu mobile -->
 			<nav class="wsfullmain clearfix d-block d-xl-none">
-				<div class="wsf-halfpart wsfleftpart _bg-section" style="background-image: url(img/bg-section.jpg); background-color: black;">
+				<div class="wsf-halfpart wsfleftpart _bg-section" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/bg-section.jpg); background-color: black;">
 					<div class="wsfrightpart-inner clearfix">
 						<ul class="wsfbiglink">
-						<li><a href="javascript:void(0)">Home</a></li>
-						<li><a href="javascript:void(0)">news</a></li>
-						<li><a href="javascript:void(0)">events & conferences</a></li>
-						<li><a href="javascript:void(0)">about us</a></li>
-						<li><a href="javascript:void(0)">contact</a></li>
-						<li>
-							<ul class="list-inline tool-language">
-								<li class="list-inline-item"><a href="#" class="active">ไทย</a></li>
-								<li class="list-inline-item"><a href="#">ENG</a></li>
-							</ul>
-						</li>
+							<li><a href="javascript:void(0)">Home</a></li>
+							<li><a href="javascript:void(0)">news</a></li>
+							<li><a href="javascript:void(0)">events & conferences</a></li>
+							<li><a href="javascript:void(0)">about us</a></li>
+							<li><a href="javascript:void(0)">contact</a></li>
+							<?php /*<li>
+								<ul class="list-inline tool-language">
+									<li class="list-inline-item"><a href="#" class="active">ไทย</a></li>
+									<li class="list-inline-item"><a href="#">ENG</a></li>
+								</ul>
+							</li>*/ ?>
 						</ul>
 					</div>
 				</div>
 			</nav>
 			<!-- /menu mobile -->
 		</header>
+
 		<?php /*
 		<header id="masthead" class="site-header sb-slide _heading" data-seed-scroll="<?php echo $GLOBALS['s_scroll']; ?>">
 			<div class="container">
@@ -275,7 +308,7 @@
 			if (is_front_page()) {
 				if (is_active_sidebar( 'home_banner' )) {
 					echo '<div class="home-banner">'; dynamic_sidebar( 'home_banner' ); echo '</div>';
-				} 
+				}
 				else {
 					if (($GLOBALS['s_header_desktop'] == 'overlay')) {
 						printf( '<div class="home-banner -blank _desktop">'. __('Please add Image or Slider Widget in <a href="%s">', 'plant') . __( 'Appearance <i class="si-arrow-right"></i> Widgets <i class="si-arrow-right"></i> Home Banner' , 'plant') . '</a>.</div>',  admin_url('widgets.php') );

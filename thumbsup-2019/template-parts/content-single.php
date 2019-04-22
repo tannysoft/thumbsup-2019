@@ -6,6 +6,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('content-single template-article _section _border-bottom'); ?>>
 	<header class="entry-header header">
+		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 		<div class="row">
 			<div class="col-md-6">
 			<?php if ( 'post' === get_post_type() ) : ?>
@@ -24,7 +25,6 @@
 			</ul>*/ ?>
 			</div>
 		</div>
-		<?php the_title( '<h1 class="entry-title d-none">', '</h1>' ); ?>
 	</header>
 
 	<div class="entry-content content-editor">
@@ -45,9 +45,23 @@
 	</div>
 
 	<footer class="entry-footer footer">
+	<?php /*<li class="list-inline-item"><span class="title">Tag:</span></li>*/ ?>
+	<?php
+/*
+$tags = get_tags(array(
+  'hide_empty' => false
+));
+echo '<ul>';
+foreach ($tags as $tag) {
+  echo '<li>' . $tag->name .'|'. '</li>';
+}
+echo '</ul>';
+*/
+?>
+		
 		<?php if(has_tag()) : ?>
 		<ul class="list-tag list-inline">
-			<?php $t = wp_get_post_tags(get_the_ID()); ?>
+			<?php $t = wp_get_post_tags($post->ID); ?>
 			<li class="list-inline-item"><span class="title">Tag:</span></li>
 			<?php foreach ($t as $value): ?>
 			<li class="list-inline-item"><a href="<?php echo get_tag_link($value->term_id); ?>"><?php echo $value->name; ?></a></li>
@@ -55,5 +69,6 @@
 		</ul>
 		<?php endif; ?>
 		<?php seed_entry_footer(); ?>
+	
 	</footer>
 </article>

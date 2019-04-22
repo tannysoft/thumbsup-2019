@@ -73,7 +73,7 @@ __contentSwipe.prototype = {
 
     $.ajax({
       // url: 'http://thumbsup.tan.cloud/wp-json/wp/v2/posts/' + currentId,
-      url: 'http://thumbsup.tan.cloud/index.php?rest_route=/wp/v2/posts/' + currentId,
+      url: 'http://thumbsup-uat.tan.cloud/index.php?rest_route=/wp/v2/posts/' + currentId,
     })
       .done(function(resp) {
         // console.log(resp);
@@ -230,7 +230,7 @@ __contentSwipe.prototype = {
     $.get(requestURL, function(htmlString) {
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
-      var prevContent = $(div).find(self.settings.target).parent().html();
+      var prevContent = $(div).find(self.settings.target)[0].outerHTML;
 
       var $prevItem = self.$container.find('.content-carousel-item.prev');
 
@@ -268,7 +268,7 @@ __contentSwipe.prototype = {
     $.get(requestURL, function(htmlString) {
       var div = document.createElement('div');
       div.innerHTML = htmlString.trim();
-      var nextContent = $(div).find(self.settings.target).parent().html();
+      var nextContent = $(div).find(self.settings.target)[0].outerHTML;
 
       var $nextItem = self.$container.find('.content-carousel-item.next');
 

@@ -405,7 +405,7 @@ a {
     height: 100%;
     left: 0;
     top: 0; }
-  ._bg-gradient:before {
+  /*._bg-gradient:before {
     background: #6c451f;
     background: linear-gradient(0deg, #6c451f 0%, #8d5d2b 100%); }
   ._bg-gradient:after {
@@ -413,7 +413,7 @@ a {
   ._bg-gradient ._show-relative {
     position: relative;
     z-index: 10; }
-
+*/
 /*!
  * animate.css -http://daneden.me/animate
  * Version - 3.5.0
