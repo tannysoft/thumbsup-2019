@@ -97,6 +97,11 @@ img {
   transition-delay: .8s;
   z-index: 999;
 }
+@media (max-width: 767px) {
+  #header .header-sticky.sticky .single-sticky {
+    opacity: 0;
+  }
+}
 .bg-cover {
   position: relative;
   width: 100%;
